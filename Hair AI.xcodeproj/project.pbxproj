@@ -182,6 +182,7 @@
 				609972582F65072000F5C06D /* Sources */,
 				609972592F65072000F5C06D /* Frameworks */,
 				6099725A2F65072000F5C06D /* Resources */,
+				39A4AFB5861248BBB92BE86F /* Auto Commit & Push */,
 			);
 			buildRules = (
 			);
@@ -203,6 +204,28 @@
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		39A4AFB5861248BBB92BE86F /* Auto Commit & Push */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Auto Commit & Push";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${SRCROOT}/scripts/autocommit.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXProject section */
 		609972542F65072000F5C06D /* Project object */ = {
