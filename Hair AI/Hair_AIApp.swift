@@ -1,32 +1,19 @@
-//
-//  Hair_AIApp.swift
-//  Hair AI
-//
-//  Created by Akhila Katepalli on 3/13/26.
-//
-
 import SwiftUI
-import SwiftData
+import Firebase
 
 @main
 struct Hair_AIApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Item.self,
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 
-        do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
-        } catch {
-            fatalError("Could not create ModelContainer: \(error)")
-        }
-    }()
+    @StateObject private var authVM = AuthViewModel()
+
+    init() {
+        FirebaseApp.configure()
+    }
 
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            RootView()
+                .environmentObject(authVM)
         }
-        .modelContainer(sharedModelContainer)
     }
 }

@@ -6,8 +6,43 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		609972D82F65F4EE00F5C06D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 609972D72F65F4EE00F5C06D /* GoogleService-Info.plist */; };
+		609972E22F65FFB900F5C06D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E12F65FFB900F5C06D /* FirebaseAuth */; };
+		609972E42F65FFC800F5C06D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E32F65FFC800F5C06D /* FirebaseFirestore */; };
+		609972E62F65FFDA00F5C06D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E52F65FFDA00F5C06D /* FirebaseStorage */; };
+		609972E82F65FFE600F5C06D /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E72F65FFE600F5C06D /* FirebaseCore */; };
+		609972E92F66013700F5C06D /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609972DC2F65FB8200F5C06D /* AuthViewModel.swift */; };
+		6099730E2F664AA600F5C06D /* HairAnalysisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099730D2F6648B900F5C06D /* HairAnalysisService.swift */; };
+		609973332F6A45AD00F5C06D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609973322F6A459700F5C06D /* UserProfile.swift */; };
+		609973392F6A608A00F5C06D /* Asserts.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 609973382F6A608A00F5C06D /* Asserts.xcassets */; };
+		609973612F6B547D00F5C06D /* ScanHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609973602F6B526A00F5C06D /* ScanHistoryManager.swift */; };
+		609973622F6B548300F5C06D /* ScanLimitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099735F2F6B524800F5C06D /* ScanLimitManager.swift */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		6099725C2F65072000F5C06D /* Hair AI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hair AI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		609972902F650B4600F5C06D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		609972912F650B5A00F5C06D /* HairScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairScan.swift; sourceTree = "<group>"; };
+		609972922F650B6D00F5C06D /* Diet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diet.swift; sourceTree = "<group>"; };
+		609972932F650B8B00F5C06D /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
+		609972942F650B9800F5C06D /* SignupViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignupViewModel.swift; sourceTree = "<group>"; };
+		609972952F650BA300F5C06D /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		609972962F650C1B00F5C06D /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		609972972F650C2700F5C06D /* CoreMLService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreMLService.swift; sourceTree = "<group>"; };
+		609972982F650C3500F5C06D /* Assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Assets.swift; sourceTree = "<group>"; };
+		609972992F650C4000F5C06D /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		6099729A2F650C7200F5C06D /* Fonts.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Fonts.swift; sourceTree = "<group>"; };
+		6099729B2F650C8500F5C06D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6099729C2F650C8F00F5C06D /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		609972D12F65271A00F5C06D /* HairAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairAnalysis.swift; sourceTree = "<group>"; };
+		609972D72F65F4EE00F5C06D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		609972DC2F65FB8200F5C06D /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		6099730D2F6648B900F5C06D /* HairAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairAnalysisService.swift; sourceTree = "<group>"; };
+		609973322F6A459700F5C06D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		609973382F6A608A00F5C06D /* Asserts.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Asserts.xcassets; sourceTree = "<group>"; };
+		6099735F2F6B524800F5C06D /* ScanLimitManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanLimitManager.swift; sourceTree = "<group>"; };
+		609973602F6B526A00F5C06D /* ScanHistoryManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanHistoryManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -29,6 +64,11 @@
 			path = "Hair AI";
 			sourceTree = "<group>";
 		};
+		609972772F650A7900F5C06D /* Views */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Views;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +76,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609972E22F65FFB900F5C06D /* FirebaseAuth in Frameworks */,
+				609972E42F65FFC800F5C06D /* FirebaseFirestore in Frameworks */,
+				609972E82F65FFE600F5C06D /* FirebaseCore in Frameworks */,
+				609972E62F65FFDA00F5C06D /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,17 +89,87 @@
 		609972532F65072000F5C06D = {
 			isa = PBXGroup;
 			children = (
-				6099725E2F65072000F5C06D /* Hair AI */,
+				609973382F6A608A00F5C06D /* Asserts.xcassets */,
+				609972772F650A7900F5C06D /* Views */,
+				609972702F65097000F5C06D /* Models */,
+				609972722F65099800F5C06D /* ViewModels */,
+				609972732F6509D800F5C06D /* Services */,
+				609972742F6509E700F5C06D /* Resources */,
+				609972752F6509F600F5C06D /* Helpers */,
 				6099725D2F65072000F5C06D /* Products */,
+				609972D72F65F4EE00F5C06D /* GoogleService-Info.plist */,
+				609972E02F65FFB900F5C06D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
 		6099725D2F65072000F5C06D /* Products */ = {
 			isa = PBXGroup;
 			children = (
+				6099725E2F65072000F5C06D /* Hair AI */,
 				6099725C2F65072000F5C06D /* Hair AI.app */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		609972702F65097000F5C06D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				609973322F6A459700F5C06D /* UserProfile.swift */,
+				609972D12F65271A00F5C06D /* HairAnalysis.swift */,
+				609972922F650B6D00F5C06D /* Diet.swift */,
+				609972912F650B5A00F5C06D /* HairScan.swift */,
+				609972902F650B4600F5C06D /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		609972722F65099800F5C06D /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				609972DC2F65FB8200F5C06D /* AuthViewModel.swift */,
+				609972952F650BA300F5C06D /* HomeViewModel.swift */,
+				609972942F650B9800F5C06D /* SignupViewModel.swift */,
+				609972932F650B8B00F5C06D /* LoginViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		609972732F6509D800F5C06D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				609973602F6B526A00F5C06D /* ScanHistoryManager.swift */,
+				6099735F2F6B524800F5C06D /* ScanLimitManager.swift */,
+				6099730D2F6648B900F5C06D /* HairAnalysisService.swift */,
+				609972972F650C2700F5C06D /* CoreMLService.swift */,
+				609972962F650C1B00F5C06D /* APIService.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		609972742F6509E700F5C06D /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				6099729A2F650C7200F5C06D /* Fonts.swift */,
+				609972992F650C4000F5C06D /* Color.swift */,
+				609972982F650C3500F5C06D /* Assets.swift */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		609972752F6509F600F5C06D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				6099729C2F650C8F00F5C06D /* Utilities.swift */,
+				6099729B2F650C8500F5C06D /* Extensions.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		609972E02F65FFB900F5C06D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -75,9 +189,14 @@
 			);
 			fileSystemSynchronizedGroups = (
 				6099725E2F65072000F5C06D /* Hair AI */,
+				609972772F650A7900F5C06D /* Views */,
 			);
 			name = "Hair AI";
 			packageProductDependencies = (
+				609972E12F65FFB900F5C06D /* FirebaseAuth */,
+				609972E32F65FFC800F5C06D /* FirebaseFirestore */,
+				609972E52F65FFDA00F5C06D /* FirebaseStorage */,
+				609972E72F65FFE600F5C06D /* FirebaseCore */,
 			);
 			productName = "Hair AI";
 			productReference = 6099725C2F65072000F5C06D /* Hair AI.app */;
@@ -107,6 +226,9 @@
 			);
 			mainGroup = 609972532F65072000F5C06D;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				609972D92F65F7F700F5C06D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 6099725D2F65072000F5C06D /* Products */;
 			projectDirPath = "";
@@ -122,6 +244,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				609972D82F65F4EE00F5C06D /* GoogleService-Info.plist in Resources */,
+				609973392F6A608A00F5C06D /* Asserts.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +256,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6099730E2F664AA600F5C06D /* HairAnalysisService.swift in Sources */,
+				609972E92F66013700F5C06D /* AuthViewModel.swift in Sources */,
+				609973612F6B547D00F5C06D /* ScanHistoryManager.swift in Sources */,
+				609973622F6B548300F5C06D /* ScanLimitManager.swift in Sources */,
+				609973332F6A45AD00F5C06D /* UserProfile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +272,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Hair AI/Hair_AI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -176,6 +306,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				CODE_SIGN_ENTITLEMENTS = "Hair AI/Hair_AI.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -345,6 +476,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		609972D92F65F7F700F5C06D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.10.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		609972E12F65FFB900F5C06D /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 609972D92F65F7F700F5C06D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		609972E32F65FFC800F5C06D /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 609972D92F65F7F700F5C06D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		609972E52F65FFDA00F5C06D /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 609972D92F65F7F700F5C06D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		609972E72F65FFE600F5C06D /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 609972D92F65F7F700F5C06D /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 609972542F65072000F5C06D /* Project object */;
 }
