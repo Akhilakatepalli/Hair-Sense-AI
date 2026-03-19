@@ -1,0 +1,32 @@
+# ── Sensitive files — NEVER commit these ─────────────────────
+GoogleService-Info.plist
+*.plist.backup
+
+# ── Xcode ─────────────────────────────────────────────────────
+*.xcuserstate
+*.xccheckout
+*.moved-aside
+DerivedData/
+build/
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+xcuserdata/
+*.xcscmblueprint
+*.xcworkspace/xcuserdata/
+*.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
+
+# ── Swift Package Manager ─────────────────────────────────────
+.build/
+.swiftpm/
+
+# ── macOS ─────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
