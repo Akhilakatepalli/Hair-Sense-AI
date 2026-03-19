@@ -5,6 +5,7 @@
 
 import SwiftUI
 import Combine
+import Firebase
 import FirebaseAuth
 
 class AuthViewModel: ObservableObject {
@@ -17,6 +18,11 @@ class AuthViewModel: ObservableObject {
     private var authStateHandle: AuthStateDidChangeListenerHandle?
 
     init() {
+        guard FirebaseApp.app() != nil else {
+            // Firebase not configured (GoogleService-Info.plist missing) — bypass auth
+            isLoggedIn = true
+            return
+        }
         authStateHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             DispatchQueue.main.async {
                 self?.currentUser = user
@@ -33,6 +39,7 @@ class AuthViewModel: ObservableObject {
 
     // MARK: - Sign Up
     func signUp(name: String, email: String, password: String) {
+        guard FirebaseApp.app() != nil else { isLoggedIn = true; return }
         isLoading = true
         errorMessage = ""
 
@@ -64,6 +71,7 @@ class AuthViewModel: ObservableObject {
 
     // MARK: - Login
     func login(email: String, password: String) {
+        guard FirebaseApp.app() != nil else { isLoggedIn = true; return }
         isLoading = true
         errorMessage = ""
 
@@ -84,6 +92,7 @@ class AuthViewModel: ObservableObject {
 
     // MARK: - Logout
     func logout() {
+        guard FirebaseApp.app() != nil else { isLoggedIn = false; return }
         do {
             try Auth.auth().signOut()
             DispatchQueue.main.async {
