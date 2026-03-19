@@ -7,10 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA000002HEALTHKIT00000003 /* HealthKitService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002HEALTHKIT00000004 /* HealthKitService.swift */; };
+		AA000002NOTIFSERV00000005 /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA000002NOTIFSERV00000006 /* NotificationService.swift */; };
 		609972E22F65FFB900F5C06D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E12F65FFB900F5C06D /* FirebaseAuth */; };
 		609972E42F65FFC800F5C06D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E32F65FFC800F5C06D /* FirebaseFirestore */; };
 		609972E62F65FFDA00F5C06D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E52F65FFDA00F5C06D /* FirebaseStorage */; };
 		609972E82F65FFE600F5C06D /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E72F65FFE600F5C06D /* FirebaseCore */; };
+		AA000001HEALTHKIT00000001 /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA000001HEALTHKIT00000002 /* HealthKit.framework */; };
 		609972E92F66013700F5C06D /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609972DC2F65FB8200F5C06D /* AuthViewModel.swift */; };
 		6099730E2F664AA600F5C06D /* HairAnalysisService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099730D2F6648B900F5C06D /* HairAnalysisService.swift */; };
 		609973332F6A45AD00F5C06D /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609973322F6A459700F5C06D /* UserProfile.swift */; };
@@ -20,6 +23,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		AA000001HEALTHKIT00000002 /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		AA000002HEALTHKIT00000004 /* HealthKitService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HealthKitService.swift; sourceTree = "<group>"; };
+		AA000002NOTIFSERV00000006 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		6099725C2F65072000F5C06D /* Hair AI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Hair AI.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		609972902F650B4600F5C06D /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		609972912F650B5A00F5C06D /* HairScan.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairScan.swift; sourceTree = "<group>"; };
@@ -78,6 +84,7 @@
 				609972E42F65FFC800F5C06D /* FirebaseFirestore in Frameworks */,
 				609972E82F65FFE600F5C06D /* FirebaseCore in Frameworks */,
 				609972E62F65FFDA00F5C06D /* FirebaseStorage in Frameworks */,
+				AA000001HEALTHKIT00000001 /* HealthKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -95,7 +102,7 @@
 				609972742F6509E700F5C06D /* Resources */,
 				609972752F6509F600F5C06D /* Helpers */,
 				6099725D2F65072000F5C06D /* Products */,
-					609972E02F65FFB900F5C06D /* Frameworks */,
+				609972E02F65FFB900F5C06D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +146,8 @@
 				6099730D2F6648B900F5C06D /* HairAnalysisService.swift */,
 				609972972F650C2700F5C06D /* CoreMLService.swift */,
 				609972962F650C1B00F5C06D /* APIService.swift */,
+				AA000002HEALTHKIT00000004 /* HealthKitService.swift */,
+				AA000002NOTIFSERV00000006 /* NotificationService.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -202,28 +211,6 @@
 		};
 /* End PBXNativeTarget section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		39A4AFB5861248BBB92BE86F /* Auto Commit & Push */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			name = "Auto Commit & Push";
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/bash;
-			shellScript = "\"${SRCROOT}/scripts/autocommit.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXProject section */
 		609972542F65072000F5C06D /* Project object */ = {
 			isa = PBXProject;
@@ -264,11 +251,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-					609973392F6A608A00F5C06D /* Asserts.xcassets in Resources */,
+				609973392F6A608A00F5C06D /* Asserts.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		39A4AFB5861248BBB92BE86F /* Auto Commit & Push */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Auto Commit & Push";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "\"${SRCROOT}/scripts/autocommit.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		609972582F65072000F5C06D /* Sources */ = {
@@ -280,6 +289,8 @@
 				609973612F6B547D00F5C06D /* ScanHistoryManager.swift in Sources */,
 				609973622F6B548300F5C06D /* ScanLimitManager.swift in Sources */,
 				609973332F6A45AD00F5C06D /* UserProfile.swift in Sources */,
+				AA000002HEALTHKIT00000003 /* HealthKitService.swift in Sources */,
+				AA000002NOTIFSERV00000005 /* NotificationService.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

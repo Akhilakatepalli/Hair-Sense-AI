@@ -8,6 +8,8 @@ import SwiftUI
 struct HomeView: View {
 
     @Binding var selectedTab: Int
+    @StateObject private var hk = HealthKitService.shared
+    @State private var showHealthSettings = false
 
     // ── Daily wellness (auto-reset each day) ─────────────────────────────
     @AppStorage("waterGlasses")       private var waterGlasses      = 0
@@ -139,6 +141,10 @@ struct HomeView: View {
                         .opacity(animateCards ? 1 : 0).offset(y: animateCards ? 0 : 16)
                         .animation(.easeOut(duration: 0.5).delay(0.32), value: animateCards)
 
+                    appleHealthCard
+                        .opacity(animateCards ? 1 : 0).offset(y: animateCards ? 0 : 16)
+                        .animation(.easeOut(duration: 0.5).delay(0.36), value: animateCards)
+
                     Spacer().frame(height: 110)
                 }
                 .padding(.horizontal, 20)
@@ -146,11 +152,116 @@ struct HomeView: View {
             }
         }
         .navigationBarHidden(true)
+        .sheet(isPresented: $showHealthSettings) {
+            HealthAndNotificationsView()
+        }
         .onAppear {
             resetDailyDataIfNeeded()
             updateStreak()
             withAnimation { animateCards = true; animateScore = true }
+            if hk.isAuthorized { hk.fetchAll() }
         }
+    }
+
+    // MARK: - Apple Health Card
+
+    private var appleHealthCard: some View {
+        ZStack {
+            RoundedRectangle(cornerRadius: 24)
+                .fill(Color.white.opacity(0.04))
+                .overlay(RoundedRectangle(cornerRadius: 24).stroke(Color.white.opacity(0.08), lineWidth: 1))
+
+            VStack(spacing: 14) {
+                // Header
+                HStack {
+                    HStack(spacing: 8) {
+                        Image(systemName: "heart.fill").font(.system(size: 16))
+                            .foregroundColor(Color(red: 0.95, green: 0.35, blue: 0.45))
+                        Text("Apple Health").font(.system(size: 16, weight: .bold)).foregroundColor(.white)
+                        if hk.isAuthorized {
+                            Text("⌚ Live").font(.system(size: 10, weight: .bold))
+                                .foregroundColor(Color(red: 0.20, green: 0.90, blue: 0.55))
+                                .padding(.horizontal, 8).padding(.vertical, 3)
+                                .background(Capsule().fill(Color(red: 0.20, green: 0.90, blue: 0.55).opacity(0.15)))
+                        }
+                    }
+                    Spacer()
+                    Button(action: { showHealthSettings = true }) {
+                        Text(hk.isAuthorized ? "Details →" : "Connect →")
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(Color(red: 0.90, green: 0.55, blue: 0.80))
+                    }
+                    .buttonStyle(.plain)
+                }
+
+                if hk.isAuthorized {
+                    // Live stats grid
+                    LazyVGrid(columns: Array(repeating: GridItem(.flexible(), spacing: 10), count: 3), spacing: 10) {
+                        miniHealthStat(emoji: "😴", value: hk.sleepHours > 0 ? String(format: "%.1fh", hk.sleepHours) : "--", label: "Sleep",
+                                       color: Color(red: 0.55, green: 0.25, blue: 0.88))
+                        miniHealthStat(emoji: "👟", value: hk.steps > 0 ? "\(hk.steps / 1000)K" : "--", label: "Steps",
+                                       color: Color(red: 0.20, green: 0.80, blue: 0.50))
+                        miniHealthStat(emoji: "❤️", value: hk.heartRate > 0 ? "\(Int(hk.heartRate))" : "--", label: "BPM",
+                                       color: Color(red: 0.95, green: 0.35, blue: 0.45))
+                        miniHealthStat(emoji: "💧", value: hk.waterLiters > 0 ? String(format: "%.1fL", hk.waterLiters) : "--", label: "Water",
+                                       color: Color(red: 0.20, green: 0.65, blue: 0.95))
+                        miniHealthStat(emoji: "🔥", value: hk.activeCalories > 0 ? "\(Int(hk.activeCalories))" : "--", label: "kcal",
+                                       color: Color(red: 0.95, green: 0.55, blue: 0.15))
+                        miniHealthStat(emoji: "🧠", value: hk.stressLevel, label: "Stress",
+                                       color: Color(red: 0.90, green: 0.25, blue: 0.55))
+                    }
+
+                    // AI insight strip
+                    let insight = hk.sleepInsight
+                    HStack(spacing: 10) {
+                        Text(insight.emoji).font(.system(size: 18))
+                        Text(insight.text).font(.system(size: 12)).foregroundColor(.white.opacity(0.78)).lineLimit(2)
+                        Spacer()
+                    }
+                    .padding(12)
+                    .background(RoundedRectangle(cornerRadius: 14).fill(insight.color.opacity(0.12))
+                        .overlay(RoundedRectangle(cornerRadius: 14).stroke(insight.color.opacity(0.25), lineWidth: 1)))
+
+                } else {
+                    // Not connected — prompt
+                    HStack(spacing: 14) {
+                        Text("❤️\n⌚\n💧").font(.system(size: 20)).multilineTextAlignment(.center)
+                        VStack(alignment: .leading, spacing: 4) {
+                            Text("Connect for AI-powered insights").font(.system(size: 13, weight: .semibold)).foregroundColor(.white)
+                            Text("Sleep, steps, heart rate, HRV & water from Apple Watch — all powering your hair health score")
+                                .font(.system(size: 11)).foregroundColor(Color.white.opacity(0.55)).lineLimit(3)
+                        }
+                        Spacer()
+                    }
+                    Button(action: { showHealthSettings = true }) {
+                        HStack {
+                            Image(systemName: "heart.fill").font(.system(size: 14))
+                            Text("Connect Apple Health")
+                                .font(.system(size: 14, weight: .bold))
+                        }
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity).padding(.vertical, 12)
+                        .background(LinearGradient(colors: [Color(red: 0.95, green: 0.30, blue: 0.45),
+                                                             Color(red: 0.70, green: 0.15, blue: 0.50)],
+                                                   startPoint: .leading, endPoint: .trailing))
+                        .clipShape(RoundedRectangle(cornerRadius: 14))
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+            .padding(16)
+        }
+    }
+
+    private func miniHealthStat(emoji: String, value: String, label: String, color: Color) -> some View {
+        VStack(spacing: 4) {
+            Text(emoji).font(.system(size: 18))
+            Text(value).font(.system(size: 15, weight: .bold)).foregroundColor(.white).lineLimit(1).minimumScaleFactor(0.7)
+            Text(label).font(.system(size: 9)).foregroundColor(color)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 10)
+        .background(RoundedRectangle(cornerRadius: 12).fill(color.opacity(0.10)))
     }
 
     // MARK: - Header

@@ -15,8 +15,9 @@ struct ProfileView: View {
     @AppStorage("hairLengthGoal")    private var hairLengthGoal: Double = 30.0
     @AppStorage("currentHairLength") private var currentHairLength: Double = 0.0
 
-    @State private var animateProfile = false
-    @State private var showEditSheet  = false
+    @State private var animateProfile     = false
+    @State private var showEditSheet      = false
+    @State private var showHealthSettings = false
     @State private var editName       = ""
     @State private var editAge        = ""
 
@@ -139,6 +140,7 @@ struct ProfileView: View {
         .navigationBarHidden(true)
         .onAppear { animateProfile = true }
         .sheet(isPresented: $showEditSheet) { editProfileSheet }
+        .sheet(isPresented: $showHealthSettings) { HealthAndNotificationsView() }
     }
 
     // MARK: - Avatar Section
@@ -425,7 +427,7 @@ struct ProfileView: View {
 
             VStack(spacing: 0) {
                 settingsRow(title: "Edit Profile",      icon: "pencil",                    bg: Color(red: 0.45, green: 0.18, blue: 0.88), isLast: false, isDestructive: false) { showEditSheet = true }
-                settingsRow(title: "Reminders",         icon: "bell.fill",                 bg: Color(red: 0.90, green: 0.25, blue: 0.55), isLast: false, isDestructive: false) { }
+                settingsRow(title: "Health & Reminders ❤️", icon: "heart.fill",             bg: Color(red: 0.95, green: 0.30, blue: 0.45), isLast: false, isDestructive: false) { showHealthSettings = true }
                 settingsRow(title: "Privacy",           icon: "lock.shield.fill",          bg: Color(red: 0.28, green: 0.58, blue: 0.95), isLast: false, isDestructive: false) { }
                 settingsRow(title: "Rate the App ⭐",   icon: "star.fill",                 bg: Color(red: 1.0,  green: 0.52, blue: 0.20), isLast: false, isDestructive: false) { }
                 settingsRow(title: "Sign Out",          icon: "arrow.backward.circle.fill", bg: Color(red: 0.65, green: 0.15, blue: 0.15), isLast: true,  isDestructive: true)  { authVM.logout() }
