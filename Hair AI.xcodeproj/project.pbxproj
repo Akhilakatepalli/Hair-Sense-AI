@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		609972D82F65F4EE00F5C06D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 609972D72F65F4EE00F5C06D /* GoogleService-Info.plist */; };
 		609972E22F65FFB900F5C06D /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E12F65FFB900F5C06D /* FirebaseAuth */; };
 		609972E42F65FFC800F5C06D /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E32F65FFC800F5C06D /* FirebaseFirestore */; };
 		609972E62F65FFDA00F5C06D /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 609972E52F65FFDA00F5C06D /* FirebaseStorage */; };
@@ -36,7 +35,6 @@
 		6099729B2F650C8500F5C06D /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		6099729C2F650C8F00F5C06D /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
 		609972D12F65271A00F5C06D /* HairAnalysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairAnalysis.swift; sourceTree = "<group>"; };
-		609972D72F65F4EE00F5C06D /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		609972DC2F65FB8200F5C06D /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		6099730D2F6648B900F5C06D /* HairAnalysisService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HairAnalysisService.swift; sourceTree = "<group>"; };
 		609973322F6A459700F5C06D /* UserProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
@@ -97,8 +95,7 @@
 				609972742F6509E700F5C06D /* Resources */,
 				609972752F6509F600F5C06D /* Helpers */,
 				6099725D2F65072000F5C06D /* Products */,
-				609972D72F65F4EE00F5C06D /* GoogleService-Info.plist */,
-				609972E02F65FFB900F5C06D /* Frameworks */,
+					609972E02F65FFB900F5C06D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -267,8 +264,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				609972D82F65F4EE00F5C06D /* GoogleService-Info.plist in Resources */,
-				609973392F6A608A00F5C06D /* Asserts.xcassets in Resources */,
+					609973392F6A608A00F5C06D /* Asserts.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -395,7 +391,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -458,7 +454,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
-				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu17;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;

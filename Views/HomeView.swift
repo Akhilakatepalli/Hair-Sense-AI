@@ -221,7 +221,7 @@ struct HomeView: View {
                             Text("—")
                                 .font(.system(size: 60, weight: .heavy, design: .rounded))
                                 .foregroundColor(.white.opacity(0.40))
-                            Button(action: { selectedTab = 1 }) {
+                            Button(action: { selectedTab = 3 }) {
                                 Text("Take your first scan →")
                                     .font(.system(size: 13, weight: .semibold))
                                     .foregroundColor(.white)
@@ -514,7 +514,7 @@ struct HomeView: View {
             LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 14) {
                 quickCard(icon: "camera.fill", title: "AI Hair Scan", sub: "Analyze now",
                           gradient: [Color(red: 0.90, green: 0.25, blue: 0.55), Color(red: 0.65, green: 0.10, blue: 0.78)],
-                          shadow: Color(red: 0.80, green: 0.15, blue: 0.50)) { selectedTab = 1 }
+                          shadow: Color(red: 0.80, green: 0.15, blue: 0.50)) { selectedTab = 3 }
 
                 quickCard(icon: "chart.line.uptrend.xyaxis", title: "Growth Tracker", sub: "Log length",
                           gradient: [Color(red: 0.10, green: 0.62, blue: 0.42), Color(red: 0.05, green: 0.42, blue: 0.72)],
