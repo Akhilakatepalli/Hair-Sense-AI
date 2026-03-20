@@ -46,34 +46,33 @@ struct ColorfulTabBar: View {
 
     private struct TabItem {
         let icon: String
-        let emoji: String
         let label: String
         let activeColor: Color
     }
 
-    // 7 tabs — Scan at index 3 (center)
+    // Short labels so all tabs look equal width
     private let tabs: [TabItem] = [
-        TabItem(icon: "house.fill",       emoji: "🏠", label: "Home",      activeColor: Color(red: 0.95, green: 0.55, blue: 0.80)),
-        TabItem(icon: "leaf.fill",        emoji: "🥗", label: "Nutrition", activeColor: Color(red: 0.25, green: 0.85, blue: 0.55)),
-        TabItem(icon: "chart.bar.fill",   emoji: "📈", label: "Progress",  activeColor: Color(red: 0.45, green: 0.75, blue: 1.0)),
-        TabItem(icon: "camera.fill",      emoji: "📷", label: "Scan",      activeColor: .white),
-        TabItem(icon: "person.2.fill",    emoji: "💬", label: "Community", activeColor: Color(red: 1.0, green: 0.70, blue: 0.20)),
-        TabItem(icon: "sparkles",         emoji: "✨", label: "Discover",  activeColor: Color(red: 0.80, green: 0.55, blue: 1.0)),
-        TabItem(icon: "person.fill",      emoji: "👤", label: "Profile",   activeColor: Color(red: 0.95, green: 0.45, blue: 0.55)),
+        TabItem(icon: "house.fill",     label: "Home",    activeColor: Color(red: 0.95, green: 0.55, blue: 0.80)),
+        TabItem(icon: "leaf.fill",      label: "Diet",    activeColor: Color(red: 0.25, green: 0.85, blue: 0.55)),
+        TabItem(icon: "chart.bar.fill", label: "Progress",activeColor: Color(red: 0.45, green: 0.75, blue: 1.0)),
+        TabItem(icon: "camera.fill",    label: "Scan",    activeColor: .white),
+        TabItem(icon: "person.2.fill",  label: "Social",  activeColor: Color(red: 1.0,  green: 0.70, blue: 0.20)),
+        TabItem(icon: "sparkles",       label: "Explore", activeColor: Color(red: 0.80, green: 0.55, blue: 1.0)),
+        TabItem(icon: "person.fill",    label: "Profile", activeColor: Color(red: 0.95, green: 0.45, blue: 0.55)),
     ]
 
     var body: some View {
-        ZStack {
-            // Background pill
-            Capsule()
+        ZStack(alignment: .bottom) {
+            // Background bar
+            RoundedRectangle(cornerRadius: 26)
                 .fill(Color(red: 0.07, green: 0.05, blue: 0.16))
-                .overlay(Capsule().stroke(Color.white.opacity(0.08), lineWidth: 1))
+                .overlay(RoundedRectangle(cornerRadius: 26).stroke(Color.white.opacity(0.10), lineWidth: 1))
                 .shadow(color: Color.black.opacity(0.55), radius: 24, y: -4)
+                .frame(height: 78)
 
             HStack(spacing: 0) {
                 ForEach(Array(tabs.enumerated()), id: \.offset) { index, tab in
                     if index == 3 {
-                        // Center Scan button — elevated
                         ScanCenterButton(isSelected: selectedTab == 3) {
                             withAnimation(.spring(response: 0.30, dampingFraction: 0.65)) { selectedTab = 3 }
                         }
@@ -91,13 +90,12 @@ struct ColorfulTabBar: View {
                     }
                 }
             }
+            .frame(height: 60)
             .padding(.horizontal, 4)
-            .padding(.top, 10)
-            .padding(.bottom, 24)
         }
-        .frame(height: 86)
-        .padding(.horizontal, 12)
-        .padding(.bottom, 8)
+        .frame(height: 78)
+        .padding(.horizontal, 10)
+        .padding(.bottom, 10)
     }
 }
 
@@ -112,26 +110,26 @@ struct SmallTabButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 3) {
+            VStack(spacing: 4) {
                 ZStack {
                     if isSelected {
-                        RoundedRectangle(cornerRadius: 10)
-                            .fill(activeColor.opacity(0.18))
-                            .frame(width: 36, height: 26)
+                        RoundedRectangle(cornerRadius: 8)
+                            .fill(activeColor.opacity(0.16))
+                            .frame(width: 34, height: 24)
                     }
                     Image(systemName: icon)
-                        .font(.system(size: 16, weight: isSelected ? .semibold : .regular))
-                        .foregroundColor(isSelected ? activeColor : Color.white.opacity(0.28))
-                        .scaleEffect(isSelected ? 1.08 : 1.0)
+                        .font(.system(size: 15, weight: isSelected ? .semibold : .regular))
+                        .foregroundColor(isSelected ? activeColor : Color.white.opacity(0.30))
                 }
-                .frame(height: 26)
+                .frame(width: 34, height: 24)
 
                 Text(label)
-                    .font(.system(size: 9, weight: isSelected ? .bold : .regular))
-                    .foregroundColor(isSelected ? activeColor : Color.white.opacity(0.25))
+                    .font(.system(size: 9, weight: isSelected ? .bold : .medium))
+                    .foregroundColor(isSelected ? activeColor : Color.white.opacity(0.28))
                     .lineLimit(1)
-                    .minimumScaleFactor(0.7)
+                    .fixedSize()
             }
+            .frame(height: 50)
         }
         .buttonStyle(.plain)
     }
@@ -145,13 +143,13 @@ struct ScanCenterButton: View {
 
     var body: some View {
         Button(action: action) {
-            VStack(spacing: 3) {
+            VStack(spacing: 4) {
                 ZStack {
                     if isSelected {
                         Circle()
-                            .fill(Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.30))
-                            .frame(width: 56, height: 56)
-                            .blur(radius: 10)
+                            .fill(Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.28))
+                            .frame(width: 50, height: 50)
+                            .blur(radius: 8)
                     }
                     Circle()
                         .fill(LinearGradient(
@@ -159,21 +157,19 @@ struct ScanCenterButton: View {
                                      Color(red: 0.45, green: 0.18, blue: 0.88)],
                             startPoint: .topLeading, endPoint: .bottomTrailing
                         ))
-                        .frame(width: 46, height: 46)
-                        .shadow(color: Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.50), radius: 12, y: 5)
-                        .overlay(
-                            Circle()
-                                .fill(LinearGradient(colors: [Color.white.opacity(0.22), .clear],
-                                                     startPoint: .topLeading, endPoint: .center))
-                                .frame(width: 46, height: 46)
-                        )
+                        .frame(width: 42, height: 42)
+                        .shadow(color: Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.45), radius: 10, y: 4)
                     Image(systemName: "camera.fill")
-                        .font(.system(size: 18, weight: .semibold)).foregroundColor(.white)
+                        .font(.system(size: 16, weight: .semibold)).foregroundColor(.white)
                 }
+                .frame(width: 42, height: 24)
+
                 Text("Scan")
-                    .font(.system(size: 9, weight: isSelected ? .bold : .regular))
+                    .font(.system(size: 9, weight: isSelected ? .bold : .medium))
                     .foregroundColor(isSelected ? Color(red: 0.95, green: 0.55, blue: 0.80) : Color.white.opacity(0.28))
+                    .fixedSize()
             }
+            .frame(height: 50)
         }
         .buttonStyle(.plain)
     }

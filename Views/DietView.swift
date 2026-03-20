@@ -310,10 +310,11 @@ struct DietView: View {
             }
             .padding(.horizontal, 20)
 
-            LazyVGrid(columns: [GridItem(.flexible(), spacing: 14), GridItem(.flexible(), spacing: 14)], spacing: 14) {
+            LazyVGrid(columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)], spacing: 12) {
                 ForEach($recipes) { $recipe in
                     if filteredRecipes.contains(where: { $0.id == recipe.id }) {
                         RecipePhotoCard(recipe: $recipe) { selectedRecipe = recipe }
+                            .frame(maxWidth: .infinity)
                     }
                 }
             }
@@ -377,19 +378,19 @@ struct DietView: View {
 
     static let mealPlanItems: [MealPlanItem] = [
         MealPlanItem(emoji: "🍳", name: "Egg Bowl",       time: "⏱ 10m", cal: "🔥 280",
-                     imageURL: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=300&q=80",
+                     imageURL: "https://loremflickr.com/300/300/eggs,breakfast,bowl",
                      bg: [Color(red: 0.95, green: 0.70, blue: 0.15), Color(red: 0.85, green: 0.45, blue: 0.05)]),
         MealPlanItem(emoji: "🥗", name: "Salmon Salad",   time: "⏱ 15m", cal: "🔥 320",
-                     imageURL: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=300&q=80",
+                     imageURL: "https://loremflickr.com/300/300/salmon,salad,food",
                      bg: [Color(red: 0.10, green: 0.65, blue: 0.85), Color(red: 0.05, green: 0.40, blue: 0.65)]),
         MealPlanItem(emoji: "🫐", name: "Berry Smoothie", time: "⏱ 5m",  cal: "🔥 180",
-                     imageURL: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=300&q=80",
+                     imageURL: "https://loremflickr.com/300/300/smoothie,berries",
                      bg: [Color(red: 0.70, green: 0.25, blue: 0.90), Color(red: 0.45, green: 0.10, blue: 0.70)]),
         MealPlanItem(emoji: "🥜", name: "Walnut Mix",     time: "⏱ 2m",  cal: "🔥 210",
-                     imageURL: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=300&q=80",
+                     imageURL: "https://loremflickr.com/300/300/walnuts,nuts,food",
                      bg: [Color(red: 0.85, green: 0.50, blue: 0.10), Color(red: 0.65, green: 0.30, blue: 0.05)]),
         MealPlanItem(emoji: "🐟", name: "Grilled Fish",   time: "⏱ 20m", cal: "🔥 380",
-                     imageURL: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=300&q=80",
+                     imageURL: "https://loremflickr.com/300/300/grilled,salmon,fish",
                      bg: [Color(red: 0.15, green: 0.55, blue: 0.40), Color(red: 0.05, green: 0.35, blue: 0.22)]),
     ]
 
@@ -397,7 +398,7 @@ struct DietView: View {
         DietRecipe(
             name: "Greek Salad with Chicken",
             emoji: "🥗",
-            imageURL: "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/greek,salad,chicken",
             bgColors: [Color(red: 0.15, green: 0.65, blue: 0.40), Color(red: 0.05, green: 0.45, blue: 0.25)],
             prepTime: "20 min ⏱", calories: "173 Cal 🔥",
             benefit: "Boosts shine & growth", category: "Salad",
@@ -407,7 +408,7 @@ struct DietView: View {
         DietRecipe(
             name: "Coleslaw",
             emoji: "🥬",
-            imageURL: "https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/coleslaw,salad,cabbage",
             bgColors: [Color(red: 0.50, green: 0.80, blue: 0.20), Color(red: 0.30, green: 0.60, blue: 0.08)],
             prepTime: "10 min ⏱", calories: "21 Cal 🔥",
             benefit: "Rich in Vitamin C", category: "Salad",
@@ -417,7 +418,7 @@ struct DietView: View {
         DietRecipe(
             name: "Veggie Dip Bowl",
             emoji: "🥕",
-            imageURL: "https://images.unsplash.com/photo-1547592180-85f173990554?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/vegetable,dip,carrots",
             bgColors: [Color(red: 0.95, green: 0.60, blue: 0.15), Color(red: 0.80, green: 0.40, blue: 0.05)],
             prepTime: "10 min ⏱", calories: "27 Cal 🔥",
             benefit: "Beta-carotene for scalp", category: "Salad",
@@ -427,7 +428,7 @@ struct DietView: View {
         DietRecipe(
             name: "Waldorf Salad",
             emoji: "🍎",
-            imageURL: "https://images.unsplash.com/photo-1540420773420-3366772f4999?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/waldorf,salad,apple",
             bgColors: [Color(red: 0.90, green: 0.25, blue: 0.50), Color(red: 0.65, green: 0.10, blue: 0.30)],
             prepTime: "15 min ⏱", calories: "103 Cal 🔥",
             benefit: "Walnuts boost hair density", category: "Salad",
@@ -437,7 +438,7 @@ struct DietView: View {
         DietRecipe(
             name: "Biotin Egg Bowl",
             emoji: "🍳",
-            imageURL: "https://images.unsplash.com/photo-1525351484163-7529414344d8?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/eggs,bowl,avocado",
             bgColors: [Color(red: 0.95, green: 0.75, blue: 0.15), Color(red: 0.85, green: 0.50, blue: 0.05)],
             prepTime: "10 min ⏱", calories: "310 Cal 🔥",
             benefit: "Biotin for hair keratin", category: "Breakfast",
@@ -447,7 +448,7 @@ struct DietView: View {
         DietRecipe(
             name: "Berry Smoothie Bowl",
             emoji: "🫐",
-            imageURL: "https://images.unsplash.com/photo-1511690656952-34342bb7c2f2?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/smoothie,bowl,berries",
             bgColors: [Color(red: 0.65, green: 0.20, blue: 0.88), Color(red: 0.40, green: 0.08, blue: 0.65)],
             prepTime: "5 min ⏱", calories: "185 Cal 🔥",
             benefit: "Antioxidants for shine", category: "Breakfast",
@@ -457,7 +458,7 @@ struct DietView: View {
         DietRecipe(
             name: "Grilled Salmon Plate",
             emoji: "🐟",
-            imageURL: "https://images.unsplash.com/photo-1467003909585-2f8a72700288?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/grilled,salmon,plate",
             bgColors: [Color(red: 0.10, green: 0.55, blue: 0.85), Color(red: 0.05, green: 0.35, blue: 0.65)],
             prepTime: "20 min ⏱", calories: "380 Cal 🔥",
             benefit: "Omega-3 prevents hair loss", category: "Protein",
@@ -467,7 +468,7 @@ struct DietView: View {
         DietRecipe(
             name: "Lentil Power Soup",
             emoji: "🍲",
-            imageURL: "https://images.unsplash.com/photo-1547592166-23ac45744acd?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/lentil,soup,bowl",
             bgColors: [Color(red: 0.85, green: 0.45, blue: 0.10), Color(red: 0.65, green: 0.25, blue: 0.05)],
             prepTime: "25 min ⏱", calories: "280 Cal 🔥",
             benefit: "Iron prevents hair shedding", category: "Bowl",
@@ -477,7 +478,7 @@ struct DietView: View {
         DietRecipe(
             name: "Rosemary Green Tea",
             emoji: "🍵",
-            imageURL: "https://images.unsplash.com/photo-1544787219-7f47ccb76574?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/green,tea,rosemary",
             bgColors: [Color(red: 0.15, green: 0.65, blue: 0.55), Color(red: 0.05, green: 0.45, blue: 0.35)],
             prepTime: "5 min ⏱", calories: "5 Cal 🔥",
             benefit: "Stimulates follicles", category: "Drink",
@@ -487,7 +488,7 @@ struct DietView: View {
         DietRecipe(
             name: "Avocado Protein Bowl",
             emoji: "🥑",
-            imageURL: "https://images.unsplash.com/photo-1490645935967-10de6ba17061?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/avocado,bowl,quinoa",
             bgColors: [Color(red: 0.25, green: 0.72, blue: 0.30), Color(red: 0.10, green: 0.52, blue: 0.18)],
             prepTime: "15 min ⏱", calories: "420 Cal 🔥",
             benefit: "Vitamin E for scalp health", category: "Bowl",
@@ -497,7 +498,7 @@ struct DietView: View {
         DietRecipe(
             name: "Walnut Oat Breakfast",
             emoji: "🌰",
-            imageURL: "https://images.unsplash.com/photo-1517673400267-0251440c45dc?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/oatmeal,walnuts,breakfast",
             bgColors: [Color(red: 0.80, green: 0.50, blue: 0.20), Color(red: 0.60, green: 0.30, blue: 0.08)],
             prepTime: "10 min ⏱", calories: "340 Cal 🔥",
             benefit: "Zinc for strong strands", category: "Breakfast",
@@ -507,7 +508,7 @@ struct DietView: View {
         DietRecipe(
             name: "Collagen Bone Broth",
             emoji: "🍜",
-            imageURL: "https://images.unsplash.com/photo-1476718406336-bb5a9690ee2a?w=500&q=80",
+            imageURL: "https://loremflickr.com/500/400/soup,broth,bowl",
             bgColors: [Color(red: 0.90, green: 0.30, blue: 0.55), Color(red: 0.65, green: 0.10, blue: 0.35)],
             prepTime: "30 min ⏱", calories: "95 Cal 🔥",
             benefit: "Collagen for hair structure", category: "Drink",
@@ -517,19 +518,19 @@ struct DietView: View {
     ]
 
     static let topFoods: [DietFoodItem] = [
-        DietFoodItem(name: "Salmon",       emoji: "🐟", imageURL: "https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&q=80",
+        DietFoodItem(name: "Salmon",       emoji: "🐟", imageURL: "https://loremflickr.com/200/200/salmon,fish,food",
                      benefit: "Omega-3 prevents hair loss",   nutrition: "Protein: 25g • Omega-3: 2.5g",   bgColor: Color(red: 0.10, green: 0.65, blue: 0.85)),
-        DietFoodItem(name: "Eggs",         emoji: "🥚", imageURL: "https://images.unsplash.com/photo-1562137369-1a1a0bc66744?w=200&q=80",
+        DietFoodItem(name: "Eggs",         emoji: "🥚", imageURL: "https://loremflickr.com/200/200/eggs,food",
                      benefit: "Biotin builds keratin",         nutrition: "Biotin: 10mcg • Protein: 13g",   bgColor: Color(red: 0.95, green: 0.75, blue: 0.15)),
-        DietFoodItem(name: "Spinach",      emoji: "🌿", imageURL: "https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=200&q=80",
+        DietFoodItem(name: "Spinach",      emoji: "🌿", imageURL: "https://loremflickr.com/200/200/spinach,vegetable",
                      benefit: "Iron prevents shedding",        nutrition: "Iron: 2.7mg • Folate: 15%",      bgColor: Color(red: 0.20, green: 0.75, blue: 0.40)),
-        DietFoodItem(name: "Walnuts",      emoji: "🌰", imageURL: "https://images.unsplash.com/photo-1563636619-e9143da7973b?w=200&q=80",
+        DietFoodItem(name: "Walnuts",      emoji: "🌰", imageURL: "https://loremflickr.com/200/200/walnuts,nuts",
                      benefit: "Zinc strengthens strands",      nutrition: "Zinc: 0.9mg • Omega-3: 2.6g",    bgColor: Color(red: 0.80, green: 0.50, blue: 0.15)),
-        DietFoodItem(name: "Avocado",      emoji: "🥑", imageURL: "https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=200&q=80",
+        DietFoodItem(name: "Avocado",      emoji: "🥑", imageURL: "https://loremflickr.com/200/200/avocado,food",
                      benefit: "Vitamin E for scalp health",    nutrition: "Vit E: 10% • Healthy fats: 15g", bgColor: Color(red: 0.35, green: 0.70, blue: 0.20)),
-        DietFoodItem(name: "Blueberries",  emoji: "🫐", imageURL: "https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=200&q=80",
+        DietFoodItem(name: "Blueberries",  emoji: "🫐", imageURL: "https://loremflickr.com/200/200/blueberries,fruit",
                      benefit: "Antioxidants for shine",        nutrition: "Vit C: 24% • Antioxidants: High", bgColor: Color(red: 0.50, green: 0.20, blue: 0.85)),
-        DietFoodItem(name: "Sweet Potato", emoji: "🍠", imageURL: "https://images.unsplash.com/photo-1596097635121-14b38c5d7a27?w=200&q=80",
+        DietFoodItem(name: "Sweet Potato", emoji: "🍠", imageURL: "https://loremflickr.com/200/200/sweet,potato,food",
                      benefit: "Beta-carotene = Vitamin A",     nutrition: "Vit A: 107% • Fiber: 4g",        bgColor: Color(red: 0.95, green: 0.50, blue: 0.15)),
     ]
 }
@@ -542,57 +543,69 @@ struct RecipePhotoCard: View {
 
     var body: some View {
         Button(action: onTap) {
-            ZStack(alignment: .bottom) {
-                // Real photo with gradient fallback
-                AsyncImage(url: URL(string: recipe.imageURL)) { phase in
-                    switch phase {
-                    case .success(let img):
-                        img.resizable().scaledToFill()
-                    case .failure:
-                        LinearGradient(colors: recipe.bgColors,
-                                       startPoint: .topLeading, endPoint: .bottomTrailing)
-                            .overlay(Text(recipe.emoji).font(.system(size: 52)))
-                    default:
-                        ZStack {
+            VStack(spacing: 0) {
+                // Photo area — fixed height so all cards are equal
+                ZStack(alignment: .bottom) {
+                    AsyncImage(url: URL(string: recipe.imageURL)) { phase in
+                        switch phase {
+                        case .success(let img):
+                            img.resizable().scaledToFill()
+                        case .failure:
                             LinearGradient(colors: recipe.bgColors,
                                            startPoint: .topLeading, endPoint: .bottomTrailing)
-                            ProgressView().tint(.white)
+                                .overlay(Text(recipe.emoji).font(.system(size: 44)))
+                        default:
+                            ZStack {
+                                LinearGradient(colors: recipe.bgColors,
+                                               startPoint: .topLeading, endPoint: .bottomTrailing)
+                                ProgressView().tint(.white)
+                            }
                         }
                     }
-                }
-                .frame(height: 170).clipped()
+                    .frame(height: 140)
+                    .clipped()
 
-                // Dark gradient overlay at bottom
-                LinearGradient(colors: [Color.black.opacity(0.75), .clear],
-                               startPoint: .bottom, endPoint: .center)
+                    // Gradient over photo bottom
+                    LinearGradient(colors: [Color.black.opacity(0.60), .clear],
+                                   startPoint: .bottom, endPoint: .center)
+                        .frame(height: 60)
 
-                // Badges
-                HStack(spacing: 6) {
-                    timeBadge(text: recipe.prepTime, color: Color.black.opacity(0.55))
-                    timeBadge(text: recipe.calories, color: Color(red: 0.10, green: 0.50, blue: 0.25).opacity(0.90))
-                    Spacer()
+                    // Badges row at photo bottom
+                    HStack(spacing: 5) {
+                        timeBadge(text: recipe.prepTime, color: Color.black.opacity(0.50))
+                        timeBadge(text: recipe.calories, color: Color(red: 0.10, green: 0.50, blue: 0.25).opacity(0.90))
+                        Spacer()
+                    }
+                    .padding(.horizontal, 8).padding(.bottom, 6)
                 }
-                .padding(.horizontal, 10).padding(.bottom, 8)
-            }
-            .clipShape(RoundedRectangle(cornerRadius: 20))
-            .overlay(alignment: .topTrailing) {
-                Button(action: { recipe.isFavorite.toggle() }) {
-                    Image(systemName: recipe.isFavorite ? "star.fill" : "star")
-                        .font(.system(size: 13))
-                        .foregroundColor(recipe.isFavorite ? Color(red: 0.95, green: 0.80, blue: 0.15) : .white.opacity(0.80))
-                        .padding(7)
-                        .background(Circle().fill(Color.black.opacity(0.45)))
+                .frame(height: 140)
+
+                // Title area — fixed height below photo
+                ZStack {
+                    Color.white.opacity(0.05)
+                    HStack(spacing: 8) {
+                        Text(recipe.name)
+                            .font(.system(size: 12, weight: .semibold))
+                            .foregroundColor(.white)
+                            .lineLimit(2)
+                            .multilineTextAlignment(.leading)
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                        // Favorite star
+                        Button(action: { recipe.isFavorite.toggle() }) {
+                            Image(systemName: recipe.isFavorite ? "star.fill" : "star")
+                                .font(.system(size: 13))
+                                .foregroundColor(recipe.isFavorite
+                                    ? Color(red: 0.95, green: 0.80, blue: 0.15)
+                                    : Color.white.opacity(0.40))
+                        }
+                        .buttonStyle(.plain)
+                    }
+                    .padding(.horizontal, 10)
                 }
-                .buttonStyle(.plain)
-                .padding(8)
+                .frame(height: 46)
             }
-            .overlay(alignment: .bottom) {
-                Text(recipe.name)
-                    .font(.system(size: 12, weight: .semibold)).foregroundColor(.white)
-                    .lineLimit(1).padding(.horizontal, 6)
-                    .offset(y: 20)
-            }
-            .padding(.bottom, 26)
+            .clipShape(RoundedRectangle(cornerRadius: 18))
+            .overlay(RoundedRectangle(cornerRadius: 18).stroke(Color.white.opacity(0.08), lineWidth: 1))
         }
         .buttonStyle(.plain)
     }
