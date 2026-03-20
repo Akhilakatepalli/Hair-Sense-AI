@@ -145,24 +145,33 @@ struct ScanCenterButton: View {
         Button(action: action) {
             VStack(spacing: 4) {
                 ZStack {
+                    // Glow — only when selected
                     if isSelected {
                         Circle()
-                            .fill(Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.28))
-                            .frame(width: 50, height: 50)
+                            .fill(Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.30))
+                            .frame(width: 38, height: 38)
                             .blur(radius: 8)
                     }
+                    // Circle background — dim when not selected, bright when selected
                     Circle()
-                        .fill(LinearGradient(
-                            colors: [Color(red: 0.90, green: 0.25, blue: 0.55),
-                                     Color(red: 0.45, green: 0.18, blue: 0.88)],
-                            startPoint: .topLeading, endPoint: .bottomTrailing
-                        ))
-                        .frame(width: 42, height: 42)
-                        .shadow(color: Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.45), radius: 10, y: 4)
+                        .fill(
+                            isSelected
+                            ? AnyShapeStyle(LinearGradient(
+                                colors: [Color(red: 0.90, green: 0.25, blue: 0.55),
+                                         Color(red: 0.45, green: 0.18, blue: 0.88)],
+                                startPoint: .topLeading, endPoint: .bottomTrailing))
+                            : AnyShapeStyle(Color.white.opacity(0.10))
+                        )
+                        .frame(width: 34, height: 34)
+                        .shadow(
+                            color: isSelected ? Color(red: 0.80, green: 0.15, blue: 0.50).opacity(0.45) : .clear,
+                            radius: 8, y: 3
+                        )
                     Image(systemName: "camera.fill")
-                        .font(.system(size: 16, weight: .semibold)).foregroundColor(.white)
+                        .font(.system(size: 15, weight: isSelected ? .semibold : .regular))
+                        .foregroundColor(isSelected ? .white : Color.white.opacity(0.30))
                 }
-                .frame(width: 42, height: 24)
+                .frame(width: 34, height: 24)
 
                 Text("Scan")
                     .font(.system(size: 9, weight: isSelected ? .bold : .medium))
