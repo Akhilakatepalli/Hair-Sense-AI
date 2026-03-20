@@ -11,7 +11,7 @@ struct DietRecipe: Identifiable {
     let id = UUID()
     let name: String
     let emoji: String
-    let imageURL: String
+    let imageName: String       // asset catalog name
     let bgColors: [Color]
     let prepTime: String
     let calories: String
@@ -26,7 +26,7 @@ struct DietFoodItem: Identifiable, Hashable {
     let id = UUID()
     let name: String
     let emoji: String
-    let imageURL: String
+    let imageName: String       // asset catalog name
     let benefit: String
     let nutrition: String
     let bgColor: Color
@@ -38,7 +38,7 @@ struct MealPlanItem: Identifiable {
     let name: String
     let time: String
     let cal: String
-    let imageURL: String
+    let imageName: String       // asset catalog name
     let bg: [Color]
 }
 
@@ -235,19 +235,11 @@ struct DietView: View {
 
     private func mealPlanCard(meal: MealPlanItem) -> some View {
         ZStack(alignment: .bottom) {
-            // Real photo
-            AsyncImage(url: URL(string: meal.imageURL)) { phase in
-                switch phase {
-                case .success(let img):
-                    img.resizable().scaledToFill()
-                        .frame(width: 130, height: 120).clipped()
-                default:
-                    LinearGradient(colors: meal.bg, startPoint: .top, endPoint: .bottom)
-                        .overlay(Text(meal.emoji).font(.system(size: 40)))
-                }
-            }
-            .frame(width: 130, height: 120)
-            .clipShape(RoundedRectangle(cornerRadius: 18))
+            // Bundled image — instant, no network
+            Image(meal.imageName)
+                .resizable().scaledToFill()
+                .frame(width: 130, height: 120)
+                .clipShape(RoundedRectangle(cornerRadius: 18))
 
             // Dark overlay for text
             LinearGradient(colors: [Color.black.opacity(0.70), .clear],
@@ -342,20 +334,12 @@ struct DietView: View {
 
     private func topFoodRow(food: DietFoodItem) -> some View {
         HStack(spacing: 14) {
-            // Real photo thumbnail
-            AsyncImage(url: URL(string: food.imageURL)) { phase in
-                switch phase {
-                case .success(let img):
-                    img.resizable().scaledToFill()
-                        .frame(width: 54, height: 54).clipShape(Circle())
-                default:
-                    ZStack {
-                        Circle().fill(food.bgColor.opacity(0.22)).frame(width: 54, height: 54)
-                        Text(food.emoji).font(.system(size: 28))
-                    }
-                }
-            }
-            .frame(width: 54, height: 54)
+            // Bundled ingredient image — instant
+            Image(food.imageName)
+                .resizable().scaledToFill()
+                .frame(width: 54, height: 54)
+                .clipShape(Circle())
+                .background(Circle().fill(food.bgColor.opacity(0.20)))
 
             VStack(alignment: .leading, spacing: 3) {
                 Text(food.name).font(.system(size: 14, weight: .bold)).foregroundColor(.white)
@@ -378,19 +362,19 @@ struct DietView: View {
 
     static let mealPlanItems: [MealPlanItem] = [
         MealPlanItem(emoji: "🍳", name: "Egg Bowl",       time: "⏱ 10m", cal: "🔥 280",
-                     imageURL: "https://source.unsplash.com/300x300/?poached+eggs+avocado",
+                     imageName: "food_egg_bowl",
                      bg: [Color(red: 0.95, green: 0.70, blue: 0.15), Color(red: 0.85, green: 0.45, blue: 0.05)]),
         MealPlanItem(emoji: "🥗", name: "Salmon Salad",   time: "⏱ 15m", cal: "🔥 320",
-                     imageURL: "https://source.unsplash.com/300x300/?grilled+salmon+salad",
+                     imageName: "food_salmon_plate",
                      bg: [Color(red: 0.10, green: 0.65, blue: 0.85), Color(red: 0.05, green: 0.40, blue: 0.65)]),
         MealPlanItem(emoji: "🫐", name: "Berry Smoothie", time: "⏱ 5m",  cal: "🔥 180",
-                     imageURL: "https://source.unsplash.com/300x300/?berry+smoothie",
+                     imageName: "food_smoothie_bowl",
                      bg: [Color(red: 0.70, green: 0.25, blue: 0.90), Color(red: 0.45, green: 0.10, blue: 0.70)]),
         MealPlanItem(emoji: "🥜", name: "Walnut Mix",     time: "⏱ 2m",  cal: "🔥 210",
-                     imageURL: "https://source.unsplash.com/300x300/?walnuts+nuts",
+                     imageName: "ing_walnuts",
                      bg: [Color(red: 0.85, green: 0.50, blue: 0.10), Color(red: 0.65, green: 0.30, blue: 0.05)]),
         MealPlanItem(emoji: "🐟", name: "Grilled Fish",   time: "⏱ 20m", cal: "🔥 380",
-                     imageURL: "https://source.unsplash.com/300x300/?grilled+salmon+fish",
+                     imageName: "food_salmon_plate",
                      bg: [Color(red: 0.15, green: 0.55, blue: 0.40), Color(red: 0.05, green: 0.35, blue: 0.22)]),
     ]
 
@@ -398,7 +382,7 @@ struct DietView: View {
         DietRecipe(
             name: "Greek Salad with Chicken",
             emoji: "🥗",
-            imageURL: "https://source.unsplash.com/500x400/?greek+salad+chicken",
+            imageName: "food_greek_salad",
             bgColors: [Color(red: 0.15, green: 0.65, blue: 0.40), Color(red: 0.05, green: 0.45, blue: 0.25)],
             prepTime: "20 min ⏱", calories: "173 Cal 🔥",
             benefit: "Boosts shine & growth", category: "Salad",
@@ -408,7 +392,7 @@ struct DietView: View {
         DietRecipe(
             name: "Coleslaw",
             emoji: "🥬",
-            imageURL: "https://source.unsplash.com/500x400/?coleslaw+cabbage+salad",
+            imageName: "food_coleslaw",
             bgColors: [Color(red: 0.50, green: 0.80, blue: 0.20), Color(red: 0.30, green: 0.60, blue: 0.08)],
             prepTime: "10 min ⏱", calories: "21 Cal 🔥",
             benefit: "Rich in Vitamin C", category: "Salad",
@@ -418,7 +402,7 @@ struct DietView: View {
         DietRecipe(
             name: "Veggie Dip Bowl",
             emoji: "🥕",
-            imageURL: "https://source.unsplash.com/500x400/?hummus+vegetable+dip",
+            imageName: "food_veggie_dip",
             bgColors: [Color(red: 0.95, green: 0.60, blue: 0.15), Color(red: 0.80, green: 0.40, blue: 0.05)],
             prepTime: "10 min ⏱", calories: "27 Cal 🔥",
             benefit: "Beta-carotene for scalp", category: "Salad",
@@ -428,7 +412,7 @@ struct DietView: View {
         DietRecipe(
             name: "Waldorf Salad",
             emoji: "🍎",
-            imageURL: "https://source.unsplash.com/500x400/?apple+walnut+salad",
+            imageName: "food_waldorf",
             bgColors: [Color(red: 0.90, green: 0.25, blue: 0.50), Color(red: 0.65, green: 0.10, blue: 0.30)],
             prepTime: "15 min ⏱", calories: "103 Cal 🔥",
             benefit: "Walnuts boost hair density", category: "Salad",
@@ -438,7 +422,7 @@ struct DietView: View {
         DietRecipe(
             name: "Biotin Egg Bowl",
             emoji: "🍳",
-            imageURL: "https://source.unsplash.com/500x400/?egg+bowl+spinach+avocado",
+            imageName: "food_egg_bowl",
             bgColors: [Color(red: 0.95, green: 0.75, blue: 0.15), Color(red: 0.85, green: 0.50, blue: 0.05)],
             prepTime: "10 min ⏱", calories: "310 Cal 🔥",
             benefit: "Biotin for hair keratin", category: "Breakfast",
@@ -448,7 +432,7 @@ struct DietView: View {
         DietRecipe(
             name: "Berry Smoothie Bowl",
             emoji: "🫐",
-            imageURL: "https://source.unsplash.com/500x400/?smoothie+bowl+berries+granola",
+            imageName: "food_smoothie_bowl",
             bgColors: [Color(red: 0.65, green: 0.20, blue: 0.88), Color(red: 0.40, green: 0.08, blue: 0.65)],
             prepTime: "5 min ⏱", calories: "185 Cal 🔥",
             benefit: "Antioxidants for shine", category: "Breakfast",
@@ -458,7 +442,7 @@ struct DietView: View {
         DietRecipe(
             name: "Grilled Salmon Plate",
             emoji: "🐟",
-            imageURL: "https://source.unsplash.com/500x400/?grilled+salmon+plate+lemon",
+            imageName: "food_salmon_plate",
             bgColors: [Color(red: 0.10, green: 0.55, blue: 0.85), Color(red: 0.05, green: 0.35, blue: 0.65)],
             prepTime: "20 min ⏱", calories: "380 Cal 🔥",
             benefit: "Omega-3 prevents hair loss", category: "Protein",
@@ -468,7 +452,7 @@ struct DietView: View {
         DietRecipe(
             name: "Lentil Power Soup",
             emoji: "🍲",
-            imageURL: "https://source.unsplash.com/500x400/?lentil+soup+bowl",
+            imageName: "food_lentil_soup",
             bgColors: [Color(red: 0.85, green: 0.45, blue: 0.10), Color(red: 0.65, green: 0.25, blue: 0.05)],
             prepTime: "25 min ⏱", calories: "280 Cal 🔥",
             benefit: "Iron prevents hair shedding", category: "Bowl",
@@ -478,7 +462,7 @@ struct DietView: View {
         DietRecipe(
             name: "Rosemary Green Tea",
             emoji: "🍵",
-            imageURL: "https://source.unsplash.com/500x400/?green+tea+cup+herbs",
+            imageName: "food_green_tea",
             bgColors: [Color(red: 0.15, green: 0.65, blue: 0.55), Color(red: 0.05, green: 0.45, blue: 0.35)],
             prepTime: "5 min ⏱", calories: "5 Cal 🔥",
             benefit: "Stimulates follicles", category: "Drink",
@@ -488,7 +472,7 @@ struct DietView: View {
         DietRecipe(
             name: "Avocado Protein Bowl",
             emoji: "🥑",
-            imageURL: "https://source.unsplash.com/500x400/?avocado+quinoa+bowl",
+            imageName: "food_avocado_bowl",
             bgColors: [Color(red: 0.25, green: 0.72, blue: 0.30), Color(red: 0.10, green: 0.52, blue: 0.18)],
             prepTime: "15 min ⏱", calories: "420 Cal 🔥",
             benefit: "Vitamin E for scalp health", category: "Bowl",
@@ -498,7 +482,7 @@ struct DietView: View {
         DietRecipe(
             name: "Walnut Oat Breakfast",
             emoji: "🌰",
-            imageURL: "https://source.unsplash.com/500x400/?oatmeal+breakfast+walnuts",
+            imageName: "food_oatmeal",
             bgColors: [Color(red: 0.80, green: 0.50, blue: 0.20), Color(red: 0.60, green: 0.30, blue: 0.08)],
             prepTime: "10 min ⏱", calories: "340 Cal 🔥",
             benefit: "Zinc for strong strands", category: "Breakfast",
@@ -508,7 +492,7 @@ struct DietView: View {
         DietRecipe(
             name: "Collagen Bone Broth",
             emoji: "🍜",
-            imageURL: "https://source.unsplash.com/500x400/?bone+broth+soup+warm",
+            imageName: "food_bone_broth",
             bgColors: [Color(red: 0.90, green: 0.30, blue: 0.55), Color(red: 0.65, green: 0.10, blue: 0.35)],
             prepTime: "30 min ⏱", calories: "95 Cal 🔥",
             benefit: "Collagen for hair structure", category: "Drink",
@@ -518,24 +502,24 @@ struct DietView: View {
     ]
 
     static let topFoods: [DietFoodItem] = [
-        DietFoodItem(name: "Salmon",       emoji: "🐟", imageURL: "https://source.unsplash.com/200x200/?salmon+fish",
+        DietFoodItem(name: "Salmon",       emoji: "🐟", imageName: "ing_salmon",
                      benefit: "Omega-3 prevents hair loss",   nutrition: "Protein: 25g • Omega-3: 2.5g",   bgColor: Color(red: 0.10, green: 0.65, blue: 0.85)),
-        DietFoodItem(name: "Eggs",         emoji: "🥚", imageURL: "https://source.unsplash.com/200x200/?eggs+breakfast",
+        DietFoodItem(name: "Eggs",         emoji: "🥚", imageName: "ing_eggs",
                      benefit: "Biotin builds keratin",         nutrition: "Biotin: 10mcg • Protein: 13g",   bgColor: Color(red: 0.95, green: 0.75, blue: 0.15)),
-        DietFoodItem(name: "Spinach",      emoji: "🌿", imageURL: "https://source.unsplash.com/200x200/?spinach+leaves",
+        DietFoodItem(name: "Spinach",      emoji: "🌿", imageName: "ing_spinach",
                      benefit: "Iron prevents shedding",        nutrition: "Iron: 2.7mg • Folate: 15%",      bgColor: Color(red: 0.20, green: 0.75, blue: 0.40)),
-        DietFoodItem(name: "Walnuts",      emoji: "🌰", imageURL: "https://source.unsplash.com/200x200/?walnuts",
+        DietFoodItem(name: "Walnuts",      emoji: "🌰", imageName: "ing_walnuts",
                      benefit: "Zinc strengthens strands",      nutrition: "Zinc: 0.9mg • Omega-3: 2.6g",    bgColor: Color(red: 0.80, green: 0.50, blue: 0.15)),
-        DietFoodItem(name: "Avocado",      emoji: "🥑", imageURL: "https://source.unsplash.com/200x200/?avocado+sliced",
+        DietFoodItem(name: "Avocado",      emoji: "🥑", imageName: "ing_avocado",
                      benefit: "Vitamin E for scalp health",    nutrition: "Vit E: 10% • Healthy fats: 15g", bgColor: Color(red: 0.35, green: 0.70, blue: 0.20)),
-        DietFoodItem(name: "Blueberries",  emoji: "🫐", imageURL: "https://source.unsplash.com/200x200/?blueberries",
+        DietFoodItem(name: "Blueberries",  emoji: "🫐", imageName: "ing_blueberries",
                      benefit: "Antioxidants for shine",        nutrition: "Vit C: 24% • Antioxidants: High", bgColor: Color(red: 0.50, green: 0.20, blue: 0.85)),
-        DietFoodItem(name: "Sweet Potato", emoji: "🍠", imageURL: "https://source.unsplash.com/200x200/?sweet+potato",
+        DietFoodItem(name: "Sweet Potato", emoji: "🍠", imageName: "ing_sweet_potato",
                      benefit: "Beta-carotene = Vitamin A",     nutrition: "Vit A: 107% • Fiber: 4g",        bgColor: Color(red: 0.95, green: 0.50, blue: 0.15)),
     ]
 }
 
-// MARK: - Recipe Photo Card (real AsyncImage)
+// MARK: - Recipe Photo Card (bundled image — instant load)
 
 struct RecipePhotoCard: View {
     @Binding var recipe: DietRecipe
@@ -546,24 +530,11 @@ struct RecipePhotoCard: View {
             VStack(spacing: 0) {
                 // Photo area — fixed height so all cards are equal
                 ZStack(alignment: .bottom) {
-                    AsyncImage(url: URL(string: recipe.imageURL)) { phase in
-                        switch phase {
-                        case .success(let img):
-                            img.resizable().scaledToFill()
-                        case .failure:
-                            LinearGradient(colors: recipe.bgColors,
-                                           startPoint: .topLeading, endPoint: .bottomTrailing)
-                                .overlay(Text(recipe.emoji).font(.system(size: 44)))
-                        default:
-                            ZStack {
-                                LinearGradient(colors: recipe.bgColors,
-                                               startPoint: .topLeading, endPoint: .bottomTrailing)
-                                ProgressView().tint(.white)
-                            }
-                        }
-                    }
-                    .frame(height: 140)
-                    .clipped()
+                    Image(recipe.imageName)
+                        .resizable()
+                        .scaledToFill()
+                        .frame(height: 140)
+                        .clipped()
 
                     // Gradient over photo bottom
                     LinearGradient(colors: [Color.black.opacity(0.60), .clear],
@@ -632,20 +603,13 @@ struct RecipeDetailSheet: View {
             Color(red: 0.06, green: 0.04, blue: 0.12).ignoresSafeArea()
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
-                    // Hero photo
+                    // Hero photo — bundled, instant
                     ZStack(alignment: .bottom) {
-                        AsyncImage(url: URL(string: recipe.imageURL)) { phase in
-                            switch phase {
-                            case .success(let img):
-                                img.resizable().scaledToFill().frame(height: 280).clipped()
-                            default:
-                                LinearGradient(colors: recipe.bgColors,
-                                               startPoint: .topLeading, endPoint: .bottomTrailing)
-                                    .frame(height: 280)
-                                    .overlay(Text(recipe.emoji).font(.system(size: 80)))
-                            }
-                        }
-                        .frame(height: 280)
+                        Image(recipe.imageName)
+                            .resizable()
+                            .scaledToFill()
+                            .frame(height: 280)
+                            .clipped()
 
                         // Bottom gradient
                         LinearGradient(colors: [Color(red: 0.06, green: 0.04, blue: 0.12), .clear],
