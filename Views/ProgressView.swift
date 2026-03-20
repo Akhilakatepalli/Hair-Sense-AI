@@ -158,15 +158,22 @@ struct HairProgressView: View {
                         }
                         Spacer()
                         // Streak badge
-                        VStack(spacing: 3) {
+                        VStack(spacing: 4) {
                             ZStack {
-                                Circle().fill(LinearGradient(
-                                    colors: [Color(red: 1.0, green: 0.50, blue: 0.18), Color(red: 0.95, green: 0.72, blue: 0.08)],
-                                    startPoint: .topLeading, endPoint: .bottomTrailing
-                                )).frame(width: 46, height: 46)
-                                Text("🔥").font(.system(size: 21))
+                                Circle()
+                                    .fill(Color(red: 1.0, green: 0.50, blue: 0.18).opacity(0.22))
+                                    .frame(width: 58, height: 58)
+                                    .blur(radius: 6)
+                                Circle()
+                                    .fill(LinearGradient(
+                                        colors: [Color(red: 1.0, green: 0.52, blue: 0.18), Color(red: 0.95, green: 0.70, blue: 0.08)],
+                                        startPoint: .topLeading, endPoint: .bottomTrailing
+                                    ))
+                                    .frame(width: 48, height: 48)
+                                    .shadow(color: Color(red: 1.0, green: 0.50, blue: 0.18).opacity(0.55), radius: 10, y: 3)
+                                Text("🔥").font(.system(size: 22))
                             }
-                            Text("\(streakDays)d").font(.system(size: 10, weight: .bold))
+                            Text("\(streakDays)d").font(.system(size: 11, weight: .heavy))
                                 .foregroundColor(Color(red: 1.0, green: 0.82, blue: 0.45))
                         }
                     }
@@ -210,14 +217,24 @@ struct HairProgressView: View {
                             }
                             Spacer()
                             ZStack {
-                                Circle().stroke(Color.white.opacity(0.15), lineWidth: 6).frame(width: 72, height: 72)
+                                Circle().stroke(Color.white.opacity(0.12), lineWidth: 6).frame(width: 76, height: 76)
+                                // Gradient arc ring
                                 Circle()
                                     .trim(from: 0, to: animateChart ? CGFloat(currentScore) / 100.0 : 0)
-                                    .stroke(Color.white, style: StrokeStyle(lineWidth: 6, lineCap: .round))
-                                    .frame(width: 72, height: 72).rotationEffect(.degrees(-90))
+                                    .stroke(
+                                        AngularGradient(
+                                            gradient: Gradient(colors: [Color.white.opacity(0.90), Color.white.opacity(0.30), Color.white]),
+                                            center: .center,
+                                            startAngle: .degrees(-90),
+                                            endAngle: .degrees(270)
+                                        ),
+                                        style: StrokeStyle(lineWidth: 6, lineCap: .round)
+                                    )
+                                    .frame(width: 76, height: 76).rotationEffect(.degrees(-90))
                                     .animation(.easeOut(duration: 1.2).delay(0.4), value: animateChart)
+                                    .shadow(color: Color.white.opacity(0.50), radius: 4)
                                 Text(allScans.isEmpty ? "?" : "\(currentScore)")
-                                    .font(.system(size: 16, weight: .bold, design: .rounded)).foregroundColor(.white)
+                                    .font(.system(size: 17, weight: .heavy, design: .rounded)).foregroundColor(.white)
                             }
                         }
                         .padding(24)
@@ -585,22 +602,32 @@ struct HairProgressView: View {
                     let a = achievements[i]
                     VStack(spacing: 8) {
                         ZStack {
-                            Circle()
-                                .fill(a.earned ? a.color.opacity(0.20) : Color.white.opacity(0.05))
-                                .frame(width: 54, height: 54)
+                            if a.earned {
+                                Circle()
+                                    .fill(a.color.opacity(0.16))
+                                    .frame(width: 56, height: 56)
+                                    .shadow(color: a.color.opacity(0.45), radius: 10, y: 3)
+                                Circle()
+                                    .stroke(a.color.opacity(0.45), lineWidth: 1.5)
+                                    .frame(width: 54, height: 54)
+                            } else {
+                                Circle()
+                                    .fill(Color.white.opacity(0.05))
+                                    .frame(width: 54, height: 54)
+                            }
                             Image(systemName: a.icon)
                                 .font(.system(size: 20, weight: .semibold))
-                                .foregroundColor(a.earned ? a.color : Color.white.opacity(0.18))
+                                .foregroundColor(a.earned ? a.color : Color.white.opacity(0.15))
                             if !a.earned {
                                 Image(systemName: "lock.fill")
                                     .font(.system(size: 10, weight: .bold))
-                                    .foregroundColor(Color.white.opacity(0.25))
+                                    .foregroundColor(Color.white.opacity(0.22))
                                     .offset(x: 16, y: 16)
                             }
                         }
                         Text(a.title)
                             .font(.system(size: 9, weight: .semibold))
-                            .foregroundColor(a.earned ? .white : Color.white.opacity(0.30))
+                            .foregroundColor(a.earned ? .white : Color.white.opacity(0.28))
                             .multilineTextAlignment(.center)
                             .lineLimit(2)
                     }
@@ -631,9 +658,9 @@ struct HairProgressView: View {
             }
         }
         .padding(20)
-        .background(Color(red: 0.10, green: 0.10, blue: 0.18))
+        .background(Color(red: 0.10, green: 0.09, blue: 0.20))
         .cornerRadius(22)
-        .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color(red: 0.90, green: 0.72, blue: 0.20).opacity(0.18), lineWidth: 1))
+        .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color(red: 0.90, green: 0.72, blue: 0.20).opacity(0.22), lineWidth: 1))
     }
 
     // MARK: - Scan History Section
@@ -659,10 +686,19 @@ struct HairProgressView: View {
     }
 
     private func scanHistoryRow(scan: ScanRecord, number: Int) -> some View {
-        HStack(spacing: 14) {
+        let rowColor: Color = {
+            switch scan.score {
+            case 80...100: return Color(red: 0.10, green: 0.78, blue: 0.55)
+            case 60...79:  return Color(red: 0.50, green: 0.85, blue: 1.0)
+            case 40...59:  return Color(red: 1.0,  green: 0.82, blue: 0.45)
+            default:       return Color(red: 1.0,  green: 0.55, blue: 0.55)
+            }
+        }()
+        return HStack(spacing: 14) {
             ZStack {
-                RoundedRectangle(cornerRadius: 8).fill(scoreColor.opacity(0.15)).frame(width: 36, height: 36)
-                Text("#\(number)").font(.system(size: 11, weight: .bold)).foregroundColor(scoreColor)
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(rowColor.opacity(0.18)).frame(width: 36, height: 36)
+                Text("#\(number)").font(.system(size: 11, weight: .bold)).foregroundColor(rowColor)
             }
             VStack(alignment: .leading, spacing: 2) {
                 Text(scan.condition).font(.system(size: 14, weight: .semibold)).foregroundColor(.white)
@@ -671,7 +707,8 @@ struct HairProgressView: View {
             }
             Spacer()
             Text("\(scan.score)%")
-                .font(.system(size: 16, weight: .heavy, design: .rounded)).foregroundColor(.white)
+                .font(.system(size: 16, weight: .heavy, design: .rounded))
+                .foregroundColor(rowColor)
         }
         .padding(.horizontal, 16).padding(.vertical, 12)
         .overlay(Rectangle().fill(Color.white.opacity(0.06)).frame(height: 1).padding(.leading, 62), alignment: .bottom)
@@ -816,19 +853,25 @@ struct HairProgressView: View {
     // MARK: - Mini Stat Card
 
     private func miniStat(value: String, label: String, icon: String, color: Color) -> some View {
-        VStack(spacing: 7) {
+        VStack(spacing: 8) {
             ZStack {
-                RoundedRectangle(cornerRadius: 9).fill(color.opacity(0.15)).frame(width: 34, height: 34)
-                Image(systemName: icon).font(.system(size: 13, weight: .semibold)).foregroundColor(color)
+                RoundedRectangle(cornerRadius: 10)
+                    .fill(LinearGradient(
+                        colors: [color.opacity(0.30), color.opacity(0.12)],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    ))
+                    .frame(width: 38, height: 38)
+                    .shadow(color: color.opacity(0.35), radius: 6, y: 2)
+                Image(systemName: icon).font(.system(size: 14, weight: .semibold)).foregroundColor(color)
             }
-            Text(value).font(.system(size: 14, weight: .bold, design: .rounded)).foregroundColor(.white)
+            Text(value).font(.system(size: 15, weight: .bold, design: .rounded)).foregroundColor(.white)
             Text(label).font(.system(size: 9)).foregroundColor(Color(red: 0.55, green: 0.53, blue: 0.65))
                 .multilineTextAlignment(.center).lineLimit(2)
         }
-        .frame(maxWidth: .infinity).padding(.vertical, 14)
-        .background(Color(red: 0.10, green: 0.10, blue: 0.18))
-        .cornerRadius(14)
-        .overlay(RoundedRectangle(cornerRadius: 14).stroke(Color.white.opacity(0.07), lineWidth: 1))
+        .frame(maxWidth: .infinity).padding(.vertical, 15)
+        .background(Color(red: 0.10, green: 0.09, blue: 0.20))
+        .cornerRadius(16)
+        .overlay(RoundedRectangle(cornerRadius: 16).stroke(color.opacity(0.22), lineWidth: 1))
     }
 
     // MARK: - Compare Photos
