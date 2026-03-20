@@ -378,19 +378,19 @@ struct DietView: View {
 
     static let mealPlanItems: [MealPlanItem] = [
         MealPlanItem(emoji: "🍳", name: "Egg Bowl",       time: "⏱ 10m", cal: "🔥 280",
-                     imageURL: "https://loremflickr.com/300/300/eggs,breakfast,bowl",
+                     imageURL: "https://source.unsplash.com/300x300/?poached+eggs+avocado",
                      bg: [Color(red: 0.95, green: 0.70, blue: 0.15), Color(red: 0.85, green: 0.45, blue: 0.05)]),
         MealPlanItem(emoji: "🥗", name: "Salmon Salad",   time: "⏱ 15m", cal: "🔥 320",
-                     imageURL: "https://loremflickr.com/300/300/salmon,salad,food",
+                     imageURL: "https://source.unsplash.com/300x300/?grilled+salmon+salad",
                      bg: [Color(red: 0.10, green: 0.65, blue: 0.85), Color(red: 0.05, green: 0.40, blue: 0.65)]),
         MealPlanItem(emoji: "🫐", name: "Berry Smoothie", time: "⏱ 5m",  cal: "🔥 180",
-                     imageURL: "https://loremflickr.com/300/300/smoothie,berries",
+                     imageURL: "https://source.unsplash.com/300x300/?berry+smoothie",
                      bg: [Color(red: 0.70, green: 0.25, blue: 0.90), Color(red: 0.45, green: 0.10, blue: 0.70)]),
         MealPlanItem(emoji: "🥜", name: "Walnut Mix",     time: "⏱ 2m",  cal: "🔥 210",
-                     imageURL: "https://loremflickr.com/300/300/walnuts,nuts,food",
+                     imageURL: "https://source.unsplash.com/300x300/?walnuts+nuts",
                      bg: [Color(red: 0.85, green: 0.50, blue: 0.10), Color(red: 0.65, green: 0.30, blue: 0.05)]),
         MealPlanItem(emoji: "🐟", name: "Grilled Fish",   time: "⏱ 20m", cal: "🔥 380",
-                     imageURL: "https://loremflickr.com/300/300/grilled,salmon,fish",
+                     imageURL: "https://source.unsplash.com/300x300/?grilled+salmon+fish",
                      bg: [Color(red: 0.15, green: 0.55, blue: 0.40), Color(red: 0.05, green: 0.35, blue: 0.22)]),
     ]
 
@@ -398,7 +398,7 @@ struct DietView: View {
         DietRecipe(
             name: "Greek Salad with Chicken",
             emoji: "🥗",
-            imageURL: "https://loremflickr.com/500/400/greek,salad,chicken",
+            imageURL: "https://source.unsplash.com/500x400/?greek+salad+chicken",
             bgColors: [Color(red: 0.15, green: 0.65, blue: 0.40), Color(red: 0.05, green: 0.45, blue: 0.25)],
             prepTime: "20 min ⏱", calories: "173 Cal 🔥",
             benefit: "Boosts shine & growth", category: "Salad",
@@ -408,7 +408,7 @@ struct DietView: View {
         DietRecipe(
             name: "Coleslaw",
             emoji: "🥬",
-            imageURL: "https://loremflickr.com/500/400/coleslaw,salad,cabbage",
+            imageURL: "https://source.unsplash.com/500x400/?coleslaw+cabbage+salad",
             bgColors: [Color(red: 0.50, green: 0.80, blue: 0.20), Color(red: 0.30, green: 0.60, blue: 0.08)],
             prepTime: "10 min ⏱", calories: "21 Cal 🔥",
             benefit: "Rich in Vitamin C", category: "Salad",
@@ -418,7 +418,7 @@ struct DietView: View {
         DietRecipe(
             name: "Veggie Dip Bowl",
             emoji: "🥕",
-            imageURL: "https://loremflickr.com/500/400/vegetable,dip,carrots",
+            imageURL: "https://source.unsplash.com/500x400/?hummus+vegetable+dip",
             bgColors: [Color(red: 0.95, green: 0.60, blue: 0.15), Color(red: 0.80, green: 0.40, blue: 0.05)],
             prepTime: "10 min ⏱", calories: "27 Cal 🔥",
             benefit: "Beta-carotene for scalp", category: "Salad",
@@ -428,7 +428,7 @@ struct DietView: View {
         DietRecipe(
             name: "Waldorf Salad",
             emoji: "🍎",
-            imageURL: "https://loremflickr.com/500/400/waldorf,salad,apple",
+            imageURL: "https://source.unsplash.com/500x400/?apple+walnut+salad",
             bgColors: [Color(red: 0.90, green: 0.25, blue: 0.50), Color(red: 0.65, green: 0.10, blue: 0.30)],
             prepTime: "15 min ⏱", calories: "103 Cal 🔥",
             benefit: "Walnuts boost hair density", category: "Salad",
@@ -438,7 +438,7 @@ struct DietView: View {
         DietRecipe(
             name: "Biotin Egg Bowl",
             emoji: "🍳",
-            imageURL: "https://loremflickr.com/500/400/eggs,bowl,avocado",
+            imageURL: "https://source.unsplash.com/500x400/?egg+bowl+spinach+avocado",
             bgColors: [Color(red: 0.95, green: 0.75, blue: 0.15), Color(red: 0.85, green: 0.50, blue: 0.05)],
             prepTime: "10 min ⏱", calories: "310 Cal 🔥",
             benefit: "Biotin for hair keratin", category: "Breakfast",
@@ -448,7 +448,7 @@ struct DietView: View {
         DietRecipe(
             name: "Berry Smoothie Bowl",
             emoji: "🫐",
-            imageURL: "https://loremflickr.com/500/400/smoothie,bowl,berries",
+            imageURL: "https://source.unsplash.com/500x400/?smoothie+bowl+berries+granola",
             bgColors: [Color(red: 0.65, green: 0.20, blue: 0.88), Color(red: 0.40, green: 0.08, blue: 0.65)],
             prepTime: "5 min ⏱", calories: "185 Cal 🔥",
             benefit: "Antioxidants for shine", category: "Breakfast",
@@ -458,7 +458,7 @@ struct DietView: View {
         DietRecipe(
             name: "Grilled Salmon Plate",
             emoji: "🐟",
-            imageURL: "https://loremflickr.com/500/400/grilled,salmon,plate",
+            imageURL: "https://source.unsplash.com/500x400/?grilled+salmon+plate+lemon",
             bgColors: [Color(red: 0.10, green: 0.55, blue: 0.85), Color(red: 0.05, green: 0.35, blue: 0.65)],
             prepTime: "20 min ⏱", calories: "380 Cal 🔥",
             benefit: "Omega-3 prevents hair loss", category: "Protein",
@@ -468,7 +468,7 @@ struct DietView: View {
         DietRecipe(
             name: "Lentil Power Soup",
             emoji: "🍲",
-            imageURL: "https://loremflickr.com/500/400/lentil,soup,bowl",
+            imageURL: "https://source.unsplash.com/500x400/?lentil+soup+bowl",
             bgColors: [Color(red: 0.85, green: 0.45, blue: 0.10), Color(red: 0.65, green: 0.25, blue: 0.05)],
             prepTime: "25 min ⏱", calories: "280 Cal 🔥",
             benefit: "Iron prevents hair shedding", category: "Bowl",
@@ -478,7 +478,7 @@ struct DietView: View {
         DietRecipe(
             name: "Rosemary Green Tea",
             emoji: "🍵",
-            imageURL: "https://loremflickr.com/500/400/green,tea,rosemary",
+            imageURL: "https://source.unsplash.com/500x400/?green+tea+cup+herbs",
             bgColors: [Color(red: 0.15, green: 0.65, blue: 0.55), Color(red: 0.05, green: 0.45, blue: 0.35)],
             prepTime: "5 min ⏱", calories: "5 Cal 🔥",
             benefit: "Stimulates follicles", category: "Drink",
@@ -488,7 +488,7 @@ struct DietView: View {
         DietRecipe(
             name: "Avocado Protein Bowl",
             emoji: "🥑",
-            imageURL: "https://loremflickr.com/500/400/avocado,bowl,quinoa",
+            imageURL: "https://source.unsplash.com/500x400/?avocado+quinoa+bowl",
             bgColors: [Color(red: 0.25, green: 0.72, blue: 0.30), Color(red: 0.10, green: 0.52, blue: 0.18)],
             prepTime: "15 min ⏱", calories: "420 Cal 🔥",
             benefit: "Vitamin E for scalp health", category: "Bowl",
@@ -498,7 +498,7 @@ struct DietView: View {
         DietRecipe(
             name: "Walnut Oat Breakfast",
             emoji: "🌰",
-            imageURL: "https://loremflickr.com/500/400/oatmeal,walnuts,breakfast",
+            imageURL: "https://source.unsplash.com/500x400/?oatmeal+breakfast+walnuts",
             bgColors: [Color(red: 0.80, green: 0.50, blue: 0.20), Color(red: 0.60, green: 0.30, blue: 0.08)],
             prepTime: "10 min ⏱", calories: "340 Cal 🔥",
             benefit: "Zinc for strong strands", category: "Breakfast",
@@ -508,7 +508,7 @@ struct DietView: View {
         DietRecipe(
             name: "Collagen Bone Broth",
             emoji: "🍜",
-            imageURL: "https://loremflickr.com/500/400/soup,broth,bowl",
+            imageURL: "https://source.unsplash.com/500x400/?bone+broth+soup+warm",
             bgColors: [Color(red: 0.90, green: 0.30, blue: 0.55), Color(red: 0.65, green: 0.10, blue: 0.35)],
             prepTime: "30 min ⏱", calories: "95 Cal 🔥",
             benefit: "Collagen for hair structure", category: "Drink",
@@ -518,19 +518,19 @@ struct DietView: View {
     ]
 
     static let topFoods: [DietFoodItem] = [
-        DietFoodItem(name: "Salmon",       emoji: "🐟", imageURL: "https://loremflickr.com/200/200/salmon,fish,food",
+        DietFoodItem(name: "Salmon",       emoji: "🐟", imageURL: "https://source.unsplash.com/200x200/?salmon+fish",
                      benefit: "Omega-3 prevents hair loss",   nutrition: "Protein: 25g • Omega-3: 2.5g",   bgColor: Color(red: 0.10, green: 0.65, blue: 0.85)),
-        DietFoodItem(name: "Eggs",         emoji: "🥚", imageURL: "https://loremflickr.com/200/200/eggs,food",
+        DietFoodItem(name: "Eggs",         emoji: "🥚", imageURL: "https://source.unsplash.com/200x200/?eggs+breakfast",
                      benefit: "Biotin builds keratin",         nutrition: "Biotin: 10mcg • Protein: 13g",   bgColor: Color(red: 0.95, green: 0.75, blue: 0.15)),
-        DietFoodItem(name: "Spinach",      emoji: "🌿", imageURL: "https://loremflickr.com/200/200/spinach,vegetable",
+        DietFoodItem(name: "Spinach",      emoji: "🌿", imageURL: "https://source.unsplash.com/200x200/?spinach+leaves",
                      benefit: "Iron prevents shedding",        nutrition: "Iron: 2.7mg • Folate: 15%",      bgColor: Color(red: 0.20, green: 0.75, blue: 0.40)),
-        DietFoodItem(name: "Walnuts",      emoji: "🌰", imageURL: "https://loremflickr.com/200/200/walnuts,nuts",
+        DietFoodItem(name: "Walnuts",      emoji: "🌰", imageURL: "https://source.unsplash.com/200x200/?walnuts",
                      benefit: "Zinc strengthens strands",      nutrition: "Zinc: 0.9mg • Omega-3: 2.6g",    bgColor: Color(red: 0.80, green: 0.50, blue: 0.15)),
-        DietFoodItem(name: "Avocado",      emoji: "🥑", imageURL: "https://loremflickr.com/200/200/avocado,food",
+        DietFoodItem(name: "Avocado",      emoji: "🥑", imageURL: "https://source.unsplash.com/200x200/?avocado+sliced",
                      benefit: "Vitamin E for scalp health",    nutrition: "Vit E: 10% • Healthy fats: 15g", bgColor: Color(red: 0.35, green: 0.70, blue: 0.20)),
-        DietFoodItem(name: "Blueberries",  emoji: "🫐", imageURL: "https://loremflickr.com/200/200/blueberries,fruit",
+        DietFoodItem(name: "Blueberries",  emoji: "🫐", imageURL: "https://source.unsplash.com/200x200/?blueberries",
                      benefit: "Antioxidants for shine",        nutrition: "Vit C: 24% • Antioxidants: High", bgColor: Color(red: 0.50, green: 0.20, blue: 0.85)),
-        DietFoodItem(name: "Sweet Potato", emoji: "🍠", imageURL: "https://loremflickr.com/200/200/sweet,potato,food",
+        DietFoodItem(name: "Sweet Potato", emoji: "🍠", imageURL: "https://source.unsplash.com/200x200/?sweet+potato",
                      benefit: "Beta-carotene = Vitamin A",     nutrition: "Vit A: 107% • Fiber: 4g",        bgColor: Color(red: 0.95, green: 0.50, blue: 0.15)),
     ]
 }
