@@ -104,7 +104,7 @@ struct AnimatedTabBackground: View {
         case .diet:
             return "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&fit=crop"
         case .progress:
-            return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop"
+            return "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=900&q=80&fit=crop"
         case .scan:
             return "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80&fit=crop"
         case .profile:
