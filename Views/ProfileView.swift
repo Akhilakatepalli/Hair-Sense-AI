@@ -69,21 +69,38 @@ struct ProfileView: View {
 
     var body: some View {
         ZStack {
-            Color(red: 0.06, green: 0.04, blue: 0.12).ignoresSafeArea()
+            MeshGradient(
+                width: 3, height: 3,
+                points: [
+                    .init(0, 0), .init(0.5, 0), .init(1, 0),
+                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
+                    .init(0, 1), .init(0.5, 1), .init(1, 1)
+                ],
+                colors: [
+                    Color(red: 0.22, green: 0.06, blue: 0.14),
+                    Color(red: 0.38, green: 0.08, blue: 0.20),
+                    Color(red: 0.16, green: 0.06, blue: 0.28),
+                    Color(red: 0.30, green: 0.08, blue: 0.18),
+                    Color(red: 0.24, green: 0.06, blue: 0.26),
+                    Color(red: 0.10, green: 0.06, blue: 0.24),
+                    Color(red: 0.18, green: 0.06, blue: 0.08),
+                    Color(red: 0.22, green: 0.06, blue: 0.16),
+                    Color(red: 0.06, green: 0.04, blue: 0.18)
+                ]
+            )
+            .ignoresSafeArea()
 
-            // Background blobs
-            Circle()
-                .fill(Color(red: 0.90, green: 0.25, blue: 0.55).opacity(0.28))
-                .frame(width: 380, height: 380).blur(radius: 92)
-                .offset(x: 140, y: -260).ignoresSafeArea()
-            Circle()
-                .fill(Color(red: 0.45, green: 0.18, blue: 0.88).opacity(0.22))
-                .frame(width: 300, height: 300).blur(radius: 82)
-                .offset(x: -110, y: 60).ignoresSafeArea()
-            Circle()
-                .fill(Color(red: 0.10, green: 0.78, blue: 0.55).opacity(0.12))
-                .frame(width: 240, height: 240).blur(radius: 72)
-                .offset(x: 90, y: 380).ignoresSafeArea()
+            // Decorative watermark
+            Image(systemName: "person.circle")
+                .font(.system(size: 300, weight: .ultraLight))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.055), Color.white.opacity(0.01)],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    )
+                )
+                .offset(x: 70, y: -60)
+                .ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 22) {

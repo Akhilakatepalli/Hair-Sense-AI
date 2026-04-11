@@ -31,20 +31,38 @@ struct ScanView: View {
 
     var body: some View {
         ZStack {
-            Color(red: 0.06, green: 0.04, blue: 0.12).ignoresSafeArea()
+            MeshGradient(
+                width: 3, height: 3,
+                points: [
+                    .init(0, 0), .init(0.5, 0), .init(1, 0),
+                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
+                    .init(0, 1), .init(0.5, 1), .init(1, 1)
+                ],
+                colors: [
+                    Color(red: 0.04, green: 0.06, blue: 0.20),
+                    Color(red: 0.08, green: 0.12, blue: 0.30),
+                    Color(red: 0.04, green: 0.18, blue: 0.24),
+                    Color(red: 0.06, green: 0.10, blue: 0.26),
+                    Color(red: 0.04, green: 0.16, blue: 0.28),
+                    Color(red: 0.04, green: 0.20, blue: 0.22),
+                    Color(red: 0.04, green: 0.06, blue: 0.16),
+                    Color(red: 0.04, green: 0.10, blue: 0.20),
+                    Color(red: 0.04, green: 0.14, blue: 0.18)
+                ]
+            )
+            .ignoresSafeArea()
 
-            Circle()
-                .fill(Color(red: 0.90, green: 0.25, blue: 0.55).opacity(0.30))
-                .frame(width: 380, height: 380).blur(radius: 92)
-                .offset(x: 130, y: -280).ignoresSafeArea()
-            Circle()
-                .fill(Color(red: 0.45, green: 0.18, blue: 0.88).opacity(0.24))
-                .frame(width: 300, height: 300).blur(radius: 85)
-                .offset(x: -120, y: -50).ignoresSafeArea()
-            Circle()
-                .fill(Color(red: 0.10, green: 0.78, blue: 0.55).opacity(0.10))
-                .frame(width: 240, height: 240).blur(radius: 70)
-                .offset(x: 60, y: 420).ignoresSafeArea()
+            // Decorative watermark
+            Image(systemName: "camera.aperture")
+                .font(.system(size: 300, weight: .ultraLight))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.055), Color.white.opacity(0.01)],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    )
+                )
+                .offset(x: 60, y: -40)
+                .ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {

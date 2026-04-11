@@ -92,10 +92,39 @@ struct DietView: View {
 
     private var dietBlobs: some View {
         ZStack {
-            Circle().fill(Color(red: 0.20, green: 0.75, blue: 0.35).opacity(0.12))
-                .frame(width: 350, height: 350).blur(radius: 90).offset(x: -100, y: -100)
-            Circle().fill(Color(red: 0.95, green: 0.65, blue: 0.10).opacity(0.10))
-                .frame(width: 280, height: 280).blur(radius: 80).offset(x: 130, y: 200)
+            MeshGradient(
+                width: 3, height: 3,
+                points: [
+                    .init(0, 0), .init(0.5, 0), .init(1, 0),
+                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
+                    .init(0, 1), .init(0.5, 1), .init(1, 1)
+                ],
+                colors: [
+                    Color(red: 0.04, green: 0.18, blue: 0.08),
+                    Color(red: 0.06, green: 0.24, blue: 0.10),
+                    Color(red: 0.18, green: 0.14, blue: 0.04),
+                    Color(red: 0.05, green: 0.20, blue: 0.12),
+                    Color(red: 0.10, green: 0.18, blue: 0.06),
+                    Color(red: 0.22, green: 0.16, blue: 0.04),
+                    Color(red: 0.04, green: 0.10, blue: 0.10),
+                    Color(red: 0.06, green: 0.14, blue: 0.04),
+                    Color(red: 0.16, green: 0.10, blue: 0.04)
+                ]
+            )
+            .ignoresSafeArea()
+
+            // Decorative watermark
+            Image(systemName: "leaf.fill")
+                .font(.system(size: 280, weight: .ultraLight))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.05), Color.white.opacity(0.01)],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    )
+                )
+                .rotationEffect(.degrees(25))
+                .offset(x: 90, y: -50)
+                .ignoresSafeArea()
         }
     }
 

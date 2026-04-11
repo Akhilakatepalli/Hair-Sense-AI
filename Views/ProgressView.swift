@@ -129,16 +129,38 @@ struct HairProgressView: View {
 
     var body: some View {
         ZStack {
-            Color(red: 0.06, green: 0.04, blue: 0.12).ignoresSafeArea()
+            MeshGradient(
+                width: 3, height: 3,
+                points: [
+                    .init(0, 0), .init(0.5, 0), .init(1, 0),
+                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
+                    .init(0, 1), .init(0.5, 1), .init(1, 1)
+                ],
+                colors: [
+                    Color(red: 0.04, green: 0.08, blue: 0.22),
+                    Color(red: 0.06, green: 0.18, blue: 0.36),
+                    Color(red: 0.10, green: 0.06, blue: 0.28),
+                    Color(red: 0.04, green: 0.16, blue: 0.28),
+                    Color(red: 0.06, green: 0.22, blue: 0.32),
+                    Color(red: 0.14, green: 0.08, blue: 0.30),
+                    Color(red: 0.04, green: 0.12, blue: 0.18),
+                    Color(red: 0.06, green: 0.14, blue: 0.26),
+                    Color(red: 0.08, green: 0.06, blue: 0.20)
+                ]
+            )
+            .ignoresSafeArea()
 
-            Circle()
-                .fill(Color(red: 0.90, green: 0.25, blue: 0.55).opacity(0.28))
-                .frame(width: 340, height: 340).blur(radius: 90)
-                .offset(x: 140, y: -260).ignoresSafeArea()
-            Circle()
-                .fill(Color(red: 0.45, green: 0.18, blue: 0.88).opacity(0.25))
-                .frame(width: 280, height: 280).blur(radius: 80)
-                .offset(x: -100, y: 100).ignoresSafeArea()
+            // Decorative watermark
+            Image(systemName: "chart.line.uptrend.xyaxis")
+                .font(.system(size: 240, weight: .ultraLight))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.06), Color.white.opacity(0.01)],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    )
+                )
+                .offset(x: 60, y: -80)
+                .ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 24) {

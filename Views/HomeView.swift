@@ -85,20 +85,39 @@ struct HomeView: View {
     // ── Body ──────────────────────────────────────────────────────────────
     var body: some View {
         ZStack {
-            Color(red: 0.06, green: 0.04, blue: 0.12).ignoresSafeArea()
+            MeshGradient(
+                width: 3, height: 3,
+                points: [
+                    .init(0, 0), .init(0.5, 0), .init(1, 0),
+                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
+                    .init(0, 1), .init(0.5, 1), .init(1, 1)
+                ],
+                colors: [
+                    Color(red: 0.18, green: 0.04, blue: 0.12),
+                    Color(red: 0.42, green: 0.08, blue: 0.22),
+                    Color(red: 0.14, green: 0.04, blue: 0.26),
+                    Color(red: 0.28, green: 0.06, blue: 0.16),
+                    Color(red: 0.20, green: 0.05, blue: 0.32),
+                    Color(red: 0.08, green: 0.04, blue: 0.22),
+                    Color(red: 0.20, green: 0.08, blue: 0.06),
+                    Color(red: 0.24, green: 0.06, blue: 0.18),
+                    Color(red: 0.05, green: 0.04, blue: 0.18)
+                ]
+            )
+            .ignoresSafeArea()
 
-            Circle()
-                .fill(Color(red: 0.45, green: 0.18, blue: 0.88).opacity(0.35))
-                .frame(width: 380, height: 380).blur(radius: 95)
-                .offset(x: 150, y: -200).ignoresSafeArea()
-            Circle()
-                .fill(Color(red: 0.90, green: 0.25, blue: 0.55).opacity(0.28))
-                .frame(width: 300, height: 300).blur(radius: 85)
-                .offset(x: -120, y: 80).ignoresSafeArea()
-            Circle()
-                .fill(Color(red: 0.10, green: 0.78, blue: 0.55).opacity(0.18))
-                .frame(width: 240, height: 240).blur(radius: 75)
-                .offset(x: 90, y: 380).ignoresSafeArea()
+            // Decorative watermark
+            Image(systemName: "sparkles")
+                .font(.system(size: 300, weight: .ultraLight))
+                .foregroundStyle(
+                    LinearGradient(
+                        colors: [Color.white.opacity(0.055), Color.white.opacity(0.01)],
+                        startPoint: .topLeading, endPoint: .bottomTrailing
+                    )
+                )
+                .rotationEffect(.degrees(-20))
+                .offset(x: 70, y: -60)
+                .ignoresSafeArea()
 
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 22) {
