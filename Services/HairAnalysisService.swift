@@ -46,7 +46,7 @@ struct MealRecipe {
 
 class HairAnalysisService {
 
-    private let apiKey = "" // Add your Anthropic API key here
+    private let apiKey = "YOUR_ANTHROPIC_API_KEY_HERE" // ← replace with your key from console.anthropic.com
     private let apiURL = "https://api.anthropic.com/v1/messages"
 
     func analyzeHair(image: UIImage, completion: @escaping (Result<HairAnalysisResult, Error>) -> Void) {
@@ -67,24 +67,79 @@ class HairAnalysisService {
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
         request.setValue("2023-06-01", forHTTPHeaderField: "anthropic-version")
 
-        // Prompt
+        // Prompt — full schema matching the result parser
         let prompt = """
-        Analyze this hair and scalp image and provide a detailed assessment.
-        Respond ONLY in this exact JSON format with no extra text:
+        You are a professional trichologist (hair and scalp specialist) analyzing a hair/scalp image.
+        Provide a comprehensive, doctor-quality hair health assessment.
+        Respond ONLY in this exact JSON format with no extra text or markdown:
         {
           "overallScore": <number 0-100>,
           "condition": "<Excellent/Good/Fair/Poor>",
           "density": "<High/Medium/Low>",
-          "scalpHealth": "<Healthy/Dry/Oily/Irritated>",
+          "scalpHealth": "<Healthy/Dry/Oily/Irritated/Flaky/Sensitive>",
           "hairLossRisk": "<Low/Medium/High>",
-          "recommendations": ["<tip1>", "<tip2>", "<tip3>"],
-          "dietTips": ["<diet1>", "<diet2>", "<diet3>"]
+          "hairType": "<Normal/Dry/Oily/Combination/Damaged>",
+          "mainIssues": ["<issue1>", "<issue2>", "<issue3>"],
+          "recommendations": ["<rec1>", "<rec2>", "<rec3>", "<rec4>", "<rec5>"],
+          "oilMassage": {
+            "recommended": "<oil name>",
+            "frequency": "<e.g. 2-3 times per week>",
+            "technique": "<step by step technique>",
+            "duration": "<e.g. 10-15 minutes>",
+            "benefits": "<specific benefits for this condition>"
+          },
+          "hairCareRoutine": {
+            "morning": "<morning steps>",
+            "evening": "<evening steps>",
+            "weekly": "<weekly deep treatment>",
+            "shampooing": "<how often and technique>",
+            "conditioning": "<conditioning tips>"
+          },
+          "productRecommendations": {
+            "shampoo": "<type with key ingredients>",
+            "conditioner": "<type of conditioner>",
+            "treatment": "<treatment or mask>",
+            "avoid": "<ingredients to avoid>"
+          },
+          "dosAndDonts": {
+            "dos": ["<do1>", "<do2>", "<do3>", "<do4>", "<do5>"],
+            "donts": ["<dont1>", "<dont2>", "<dont3>", "<dont4>", "<dont5>"]
+          },
+          "dietTips": ["<food + benefit>", "<food + benefit>", "<food + benefit>", "<food + benefit>", "<food + benefit>"],
+          "vitaminsNeeded": ["<vitamin + reason>", "<vitamin + reason>", "<vitamin + reason>"],
+          "whenToSeeDoctor": "<symptoms requiring professional consultation>",
+          "mealRecipes": [
+            {
+              "name": "<recipe name>",
+              "benefit": "<hair benefit>",
+              "prepTime": "<e.g. 10 mins>",
+              "ingredients": ["<ing1>", "<ing2>", "<ing3>"],
+              "steps": ["<step1>", "<step2>", "<step3>"],
+              "nutrients": ["<nutrient1>", "<nutrient2>", "<nutrient3>"]
+            },
+            {
+              "name": "<recipe name 2>",
+              "benefit": "<hair benefit>",
+              "prepTime": "<e.g. 15 mins>",
+              "ingredients": ["<ing1>", "<ing2>", "<ing3>"],
+              "steps": ["<step1>", "<step2>", "<step3>"],
+              "nutrients": ["<nutrient1>", "<nutrient2>", "<nutrient3>"]
+            },
+            {
+              "name": "<recipe name 3>",
+              "benefit": "<hair benefit>",
+              "prepTime": "<e.g. 5 mins>",
+              "ingredients": ["<ing1>", "<ing2>", "<ing3>"],
+              "steps": ["<step1>", "<step2>", "<step3>"],
+              "nutrients": ["<nutrient1>", "<nutrient2>", "<nutrient3>"]
+            }
+          ]
         }
         """
 
         let body: [String: Any] = [
-            "model": "claude-opus-4-5",
-            "max_tokens": 1024,
+            "model": "claude-opus-4-6",
+            "max_tokens": 4096,
             "messages": [
                 [
                     "role": "user",
@@ -341,8 +396,8 @@ class HairAnalysisService {
         """
 
         let body: [String: Any] = [
-            "model": "claude-opus-4-5",
-            "max_tokens": 1024,
+            "model": "claude-opus-4-6",
+            "max_tokens": 2048,
             "messages": [
                 [
                     "role": "user",
