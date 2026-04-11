@@ -292,9 +292,7 @@ struct ProfileView: View {
             Spacer()
         }
         .padding(14)
-        .background(Color(red: 0.10, green: 0.09, blue: 0.20))
-        .cornerRadius(18)
-        .overlay(RoundedRectangle(cornerRadius: 18).stroke(gradient[0].opacity(0.22), lineWidth: 1))
+        .glassCard(cornerRadius: 18, tint: gradient[0])
     }
 
     // MARK: - Last Scan Card
@@ -325,9 +323,7 @@ struct ProfileView: View {
             }
         }
         .padding(18)
-        .background(Color(red: 0.10, green: 0.09, blue: 0.20))
-        .cornerRadius(22)
-        .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color(red: 0.65, green: 0.40, blue: 1.0).opacity(0.20), lineWidth: 1))
+        .glassCard(cornerRadius: 22, tint: Color(red: 0.65, green: 0.40, blue: 1.0))
     }
 
     private func scanDetailChip(label: String, value: String, icon: String, color: Color) -> some View {
@@ -459,9 +455,7 @@ struct ProfileView: View {
             }
         }
         .padding(18)
-        .background(Color(red: 0.10, green: 0.09, blue: 0.20))
-        .cornerRadius(22)
-        .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color(red: 0.90, green: 0.72, blue: 0.20).opacity(0.22), lineWidth: 1))
+        .glassCard(cornerRadius: 22, tint: Color(red: 0.90, green: 0.72, blue: 0.20))
     }
 
     // MARK: - Personal Info Card
@@ -487,9 +481,7 @@ struct ProfileView: View {
                 infoRow(label: "Hair Goal", value: hairLengthGoal > 0 ? String(format: "%.0f cm", hairLengthGoal) : "Not set",
                         icon: "ruler.fill",   color: Color(red: 1.0, green: 0.52, blue: 0.20), isLast: true)
             }
-            .background(Color(red: 0.10, green: 0.09, blue: 0.20))
-            .cornerRadius(16)
-            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.white.opacity(0.08), lineWidth: 1))
+            .glassCard(cornerRadius: 16)
         }
     }
 
@@ -533,9 +525,7 @@ struct ProfileView: View {
                 settingsRow(title: "Rate the App ⭐",      icon: "star.fill",                  bg: Color(red: 1.0,  green: 0.52, blue: 0.20), isLast: false, isDestructive: false) { }
                 settingsRow(title: "Sign Out",             icon: "arrow.backward.circle.fill", bg: Color(red: 0.65, green: 0.15, blue: 0.15), isLast: true,  isDestructive: true)  { authVM.logout() }
             }
-            .background(Color(red: 0.10, green: 0.09, blue: 0.20))
-            .cornerRadius(16)
-            .overlay(RoundedRectangle(cornerRadius: 16).stroke(Color.white.opacity(0.08), lineWidth: 1))
+            .glassCard(cornerRadius: 16)
         }
     }
 

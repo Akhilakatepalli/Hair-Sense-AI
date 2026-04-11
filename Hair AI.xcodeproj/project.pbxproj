@@ -21,6 +21,7 @@
 		609973612F6B547D00F5C06D /* ScanHistoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 609973602F6B526A00F5C06D /* ScanHistoryManager.swift */; };
 		609973622F6B548300F5C06D /* ScanLimitManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099735F2F6B524800F5C06D /* ScanLimitManager.swift */; };
 		6099729C2F650C8F00F5C06E /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099729C2F650C8F00F5C06D /* Utilities.swift */; };
+		6099729B2F650C8500F5C06E /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6099729B2F650C8500F5C06D /* Extensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -293,6 +294,7 @@
 				AA000002HEALTHKIT00000003 /* HealthKitService.swift in Sources */,
 				AA000002NOTIFSERV00000005 /* NotificationService.swift in Sources */,
 				6099729C2F650C8F00F5C06E /* Utilities.swift in Sources */,
+				6099729B2F650C8500F5C06E /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

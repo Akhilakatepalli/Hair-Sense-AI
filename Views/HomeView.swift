@@ -445,9 +445,7 @@ struct HomeView: View {
             }
         }
         .padding(18)
-        .background(Color.white.opacity(0.05))
-        .cornerRadius(22)
-        .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color.white.opacity(0.08), lineWidth: 1))
+        .glassCard(cornerRadius: 22)
     }
 
     private func wellnessRing(icon: String, title: String, value: String, progress: Double, color: Color, action: @escaping () -> Void) -> some View {
@@ -518,9 +516,7 @@ struct HomeView: View {
             }
         }
         .padding(18)
-        .background(Color.white.opacity(0.05))
-        .cornerRadius(22)
-        .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color.white.opacity(0.08), lineWidth: 1))
+        .glassCard(cornerRadius: 22)
     }
 
     private func checklistRow(title: String, sub: String, icon: String, color: Color, binding: Binding<Bool>) -> some View {
@@ -677,9 +673,7 @@ struct HomeView: View {
             }
         }
         .padding(18)
-        .background(Color.white.opacity(0.05))
-        .cornerRadius(22)
-        .overlay(RoundedRectangle(cornerRadius: 22).stroke(Color(red: 0.90, green: 0.25, blue: 0.55).opacity(0.22), lineWidth: 1))
+        .glassCard(cornerRadius: 22, tint: Color(red: 0.90, green: 0.25, blue: 0.55))
     }
 
     // MARK: - Tips Carousel

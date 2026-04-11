@@ -220,13 +220,9 @@ struct ScanView: View {
             }
         }
         .padding(.horizontal, 16).padding(.vertical, 13)
-        .background(Color(red: 0.10, green: 0.10, blue: 0.18))
-        .cornerRadius(18)
-        .overlay(RoundedRectangle(cornerRadius: 18).stroke(
-            limitMgr.canScan
-                ? Color(red: 0.35, green: 1.0, blue: 0.68).opacity(0.18)
-                : Color(red: 1.0, green: 0.45, blue: 0.45).opacity(0.28),
-            lineWidth: 1))
+        .glassCard(cornerRadius: 18, tint: limitMgr.canScan
+            ? Color(red: 0.35, green: 1.0, blue: 0.68)
+            : Color(red: 1.0, green: 0.45, blue: 0.45))
     }
 
     // MARK: - Scan Preview Area

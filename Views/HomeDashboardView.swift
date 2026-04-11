@@ -59,11 +59,20 @@ struct ColorfulTabBar: View {
 
     var body: some View {
         ZStack(alignment: .bottom) {
-            // Background bar
+            // Background bar — frosted glass
             RoundedRectangle(cornerRadius: 26)
-                .fill(Color(red: 0.07, green: 0.05, blue: 0.16))
-                .overlay(RoundedRectangle(cornerRadius: 26).stroke(Color.white.opacity(0.10), lineWidth: 1))
-                .shadow(color: Color.black.opacity(0.55), radius: 24, y: -4)
+                .fill(.ultraThinMaterial)
+                .overlay(
+                    RoundedRectangle(cornerRadius: 26)
+                        .stroke(
+                            LinearGradient(
+                                colors: [Color.white.opacity(0.35), Color.white.opacity(0.08)],
+                                startPoint: .topLeading, endPoint: .bottomTrailing
+                            ),
+                            lineWidth: 1
+                        )
+                )
+                .shadow(color: Color.black.opacity(0.50), radius: 28, y: -6)
                 .frame(height: 78)
 
             HStack(spacing: 0) {
