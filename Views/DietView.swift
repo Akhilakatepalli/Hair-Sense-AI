@@ -67,8 +67,7 @@ struct DietView: View {
 
     var body: some View {
         ZStack {
-            Color(red: 0.06, green: 0.04, blue: 0.12).ignoresSafeArea()
-            dietBlobs
+            AnimatedTabBackground(theme: .diet)
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 0) {
@@ -88,45 +87,6 @@ struct DietView: View {
         }
     }
 
-    // MARK: - Background
-
-    private var dietBlobs: some View {
-        ZStack {
-            MeshGradient(
-                width: 3, height: 3,
-                points: [
-                    .init(0, 0), .init(0.5, 0), .init(1, 0),
-                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
-                    .init(0, 1), .init(0.5, 1), .init(1, 1)
-                ],
-                colors: [
-                    Color(red: 0.04, green: 0.18, blue: 0.08),
-                    Color(red: 0.06, green: 0.24, blue: 0.10),
-                    Color(red: 0.18, green: 0.14, blue: 0.04),
-                    Color(red: 0.05, green: 0.20, blue: 0.12),
-                    Color(red: 0.10, green: 0.18, blue: 0.06),
-                    Color(red: 0.22, green: 0.16, blue: 0.04),
-                    Color(red: 0.04, green: 0.10, blue: 0.10),
-                    Color(red: 0.06, green: 0.14, blue: 0.04),
-                    Color(red: 0.16, green: 0.10, blue: 0.04)
-                ]
-            )
-            .ignoresSafeArea()
-
-            // Decorative watermark
-            Image(systemName: "leaf.fill")
-                .font(.system(size: 280, weight: .ultraLight))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [Color.white.opacity(0.05), Color.white.opacity(0.01)],
-                        startPoint: .topLeading, endPoint: .bottomTrailing
-                    )
-                )
-                .rotationEffect(.degrees(25))
-                .offset(x: 90, y: -50)
-                .ignoresSafeArea()
-        }
-    }
 
     // MARK: - Header
 

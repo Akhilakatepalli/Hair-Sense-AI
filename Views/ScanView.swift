@@ -31,38 +31,7 @@ struct ScanView: View {
 
     var body: some View {
         ZStack {
-            MeshGradient(
-                width: 3, height: 3,
-                points: [
-                    .init(0, 0), .init(0.5, 0), .init(1, 0),
-                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
-                    .init(0, 1), .init(0.5, 1), .init(1, 1)
-                ],
-                colors: [
-                    Color(red: 0.04, green: 0.06, blue: 0.20),
-                    Color(red: 0.08, green: 0.12, blue: 0.30),
-                    Color(red: 0.04, green: 0.18, blue: 0.24),
-                    Color(red: 0.06, green: 0.10, blue: 0.26),
-                    Color(red: 0.04, green: 0.16, blue: 0.28),
-                    Color(red: 0.04, green: 0.20, blue: 0.22),
-                    Color(red: 0.04, green: 0.06, blue: 0.16),
-                    Color(red: 0.04, green: 0.10, blue: 0.20),
-                    Color(red: 0.04, green: 0.14, blue: 0.18)
-                ]
-            )
-            .ignoresSafeArea()
-
-            // Decorative watermark
-            Image(systemName: "camera.aperture")
-                .font(.system(size: 300, weight: .ultraLight))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [Color.white.opacity(0.055), Color.white.opacity(0.01)],
-                        startPoint: .topLeading, endPoint: .bottomTrailing
-                    )
-                )
-                .offset(x: 60, y: -40)
-                .ignoresSafeArea()
+            AnimatedTabBackground(theme: .scan)
 
             ScrollView(showsIndicators: false) {
                 VStack(spacing: 20) {

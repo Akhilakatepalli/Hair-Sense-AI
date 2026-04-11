@@ -85,39 +85,7 @@ struct HomeView: View {
     // ── Body ──────────────────────────────────────────────────────────────
     var body: some View {
         ZStack {
-            MeshGradient(
-                width: 3, height: 3,
-                points: [
-                    .init(0, 0), .init(0.5, 0), .init(1, 0),
-                    .init(0, 0.5), .init(0.5, 0.5), .init(1, 0.5),
-                    .init(0, 1), .init(0.5, 1), .init(1, 1)
-                ],
-                colors: [
-                    Color(red: 0.18, green: 0.04, blue: 0.12),
-                    Color(red: 0.42, green: 0.08, blue: 0.22),
-                    Color(red: 0.14, green: 0.04, blue: 0.26),
-                    Color(red: 0.28, green: 0.06, blue: 0.16),
-                    Color(red: 0.20, green: 0.05, blue: 0.32),
-                    Color(red: 0.08, green: 0.04, blue: 0.22),
-                    Color(red: 0.20, green: 0.08, blue: 0.06),
-                    Color(red: 0.24, green: 0.06, blue: 0.18),
-                    Color(red: 0.05, green: 0.04, blue: 0.18)
-                ]
-            )
-            .ignoresSafeArea()
-
-            // Decorative watermark
-            Image(systemName: "sparkles")
-                .font(.system(size: 300, weight: .ultraLight))
-                .foregroundStyle(
-                    LinearGradient(
-                        colors: [Color.white.opacity(0.055), Color.white.opacity(0.01)],
-                        startPoint: .topLeading, endPoint: .bottomTrailing
-                    )
-                )
-                .rotationEffect(.degrees(-20))
-                .offset(x: 70, y: -60)
-                .ignoresSafeArea()
+            AnimatedTabBackground(theme: .home)
 
             ScrollView(showsIndicators: false) {
                 VStack(alignment: .leading, spacing: 22) {
