@@ -42,18 +42,20 @@ struct AnimatedTabBackground: View {
                             .scaledToFill()
                             .frame(width: geo.size.width, height: geo.size.height)
                             .clipped()
+                            // Diet: blur heavily so it becomes abstract green texture
+                            .blur(radius: theme == .diet ? 14 : 0)
                     default:
                         fallbackGradient
                     }
                 }
                 .ignoresSafeArea()
 
-                // ── Layer 2: Dark scrim — bottom-heavy for readability ────
+                // ── Layer 2: Dark scrim — Diet gets heavier cover ─────────
                 LinearGradient(
                     stops: [
-                        .init(color: .black.opacity(0.82), location: 0.0),
-                        .init(color: .black.opacity(0.32), location: 0.38),
-                        .init(color: .black.opacity(0.42), location: 0.65),
+                        .init(color: .black.opacity(theme == .diet ? 0.88 : 0.82), location: 0.0),
+                        .init(color: .black.opacity(theme == .diet ? 0.55 : 0.32), location: 0.38),
+                        .init(color: .black.opacity(theme == .diet ? 0.62 : 0.42), location: 0.65),
                         .init(color: .black.opacity(0.90), location: 1.0)
                     ],
                     startPoint: .bottom, endPoint: .top
@@ -100,7 +102,7 @@ struct AnimatedTabBackground: View {
         case .home:
             return "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=900&q=80&fit=crop"
         case .diet:
-            return "https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=900&q=80&fit=crop"
+            return "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&q=80&fit=crop"
         case .progress:
             return "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=900&q=80&fit=crop"
         case .scan:
