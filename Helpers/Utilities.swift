@@ -33,30 +33,33 @@ struct AnimatedTabBackground: View {
         GeometryReader { geo in
             ZStack {
 
-                // ── Layer 1: Background photo ───────────────────���─────────
-                AsyncImage(url: URL(string: photoURL)) { phase in
-                    switch phase {
-                    case .success(let img):
-                        img
-                            .resizable()
-                            .scaledToFill()
-                            .frame(width: geo.size.width, height: geo.size.height)
-                            .clipped()
-                            // Diet: blur heavily so it becomes abstract green texture
-                            .blur(radius: theme == .diet ? 14 : 0)
-                    default:
-                        fallbackGradient
+                // ── Layer 1: Base — photo or animated canvas ─────────────
+                if theme == .progress {
+                    progressCanvas(geo: geo)
+                } else {
+                    AsyncImage(url: URL(string: photoURL)) { phase in
+                        switch phase {
+                        case .success(let img):
+                            img
+                                .resizable()
+                                .scaledToFill()
+                                .frame(width: geo.size.width, height: geo.size.height)
+                                .clipped()
+                                .blur(radius: theme == .diet ? 14 : 0)
+                        default:
+                            fallbackGradient
+                        }
                     }
+                    .ignoresSafeArea()
                 }
-                .ignoresSafeArea()
 
-                // ── Layer 2: Dark scrim — Diet gets heavier cover ─────────
+                // ── Layer 2: Dark scrim ───────────────────────────────────
                 LinearGradient(
                     stops: [
-                        .init(color: .black.opacity(theme == .diet ? 0.88 : 0.82), location: 0.0),
-                        .init(color: .black.opacity(theme == .diet ? 0.55 : 0.32), location: 0.38),
-                        .init(color: .black.opacity(theme == .diet ? 0.62 : 0.42), location: 0.65),
-                        .init(color: .black.opacity(0.90), location: 1.0)
+                        .init(color: .black.opacity(theme == .diet ? 0.88 : 0.72), location: 0.0),
+                        .init(color: .black.opacity(theme == .diet ? 0.55 : 0.22), location: 0.38),
+                        .init(color: .black.opacity(theme == .diet ? 0.62 : 0.32), location: 0.65),
+                        .init(color: .black.opacity(theme == .progress ? 0.70 : 0.90), location: 1.0)
                     ],
                     startPoint: .bottom, endPoint: .top
                 )
@@ -371,6 +374,110 @@ struct AnimatedTabBackground: View {
         switch theme {
         case .progress: return -h * 0.25
         default:        return -h * 0.20
+        }
+    }
+
+    // MARK: - Progress Canvas (animated hair-growth visualization)
+
+    @ViewBuilder
+    private func progressCanvas(geo: GeometryProxy) -> some View {
+        // Deep dark base
+        Color(red: 0.04, green: 0.06, blue: 0.16).ignoresSafeArea()
+
+        TimelineView(.animation) { tl in
+            Canvas { ctx, size in
+                let t = tl.date.timeIntervalSinceReferenceDate
+
+                // ── 1. Rising hair-strand curves ──────────────────────────
+                let strandCount = 12
+                for i in 0..<strandCount {
+                    let xBase = size.width * Double(i) / Double(strandCount - 1)
+                    let phase  = Double(i) * 0.85 + t * 0.25
+                    let amp    = 18.0 + Double(i % 3) * 10.0
+
+                    var path = Path()
+                    path.move(to: CGPoint(x: xBase + sin(phase) * amp * 0.3, y: size.height + 10))
+
+                    let steps = 60
+                    for s in 1...steps {
+                        let progress = Double(s) / Double(steps)
+                        let y = size.height * (1 - progress)
+                        let wave = sin(phase + progress * 5.5) * amp * progress
+                        path.addLine(to: CGPoint(x: xBase + wave, y: y))
+                    }
+
+                    let baseOpacity = 0.055 + 0.03 * sin(phase * 0.7)
+                    let tealBlue = GraphicsContext.Shading.color(
+                        Color(red: 0.18 + 0.12 * sin(phase),
+                              green: 0.68 + 0.18 * cos(phase * 0.5),
+                              blue: 0.92).opacity(baseOpacity)
+                    )
+                    ctx.stroke(path, with: tealBlue,
+                               style: StrokeStyle(lineWidth: 1.2, lineCap: .round))
+                }
+
+                // ── 2. Ascending glow particles ───────────────────────────
+                let particleCount = 28
+                for i in 0..<particleCount {
+                    let seed   = Double(i) * 137.508
+                    let xPos   = (seed * 0.618).truncatingRemainder(dividingBy: size.width)
+                    let speed  = 0.035 + (seed * 0.0009).truncatingRemainder(dividingBy: 0.055)
+                    let raw    = t * speed * size.height + seed * 11
+                    let yPos   = size.height - raw.truncatingRemainder(dividingBy: size.height + 16)
+                    let opac   = 0.25 + 0.35 * abs(sin(t * 0.8 + seed * 0.04))
+                    let radius = CGFloat(1.4 + (seed * 0.007).truncatingRemainder(dividingBy: 2.2))
+
+                    let r = CGRect(x: xPos - radius, y: yPos - radius,
+                                   width: radius * 2, height: radius * 2)
+                    let pColor = i % 3 == 0
+                        ? Color(red: 0.14, green: 0.82, blue: 0.72).opacity(opac)
+                        : Color(red: 0.42, green: 0.65, blue: 1.0).opacity(opac)
+                    ctx.fill(Path(ellipseIn: r), with: .color(pColor))
+                }
+
+                // ── 3. Large pulsing growth ring ──────────────────────────
+                let cx = size.width * 0.78
+                let cy = size.height * 0.22
+                let baseR: Double = min(size.width, size.height) * 0.22
+                let pulse  = baseR + 10 * sin(t * 0.6)
+                let arcEnd = -90 + 300 * ((sin(t * 0.18) + 1) / 2 * 0.85 + 0.10)
+
+                // Outer faint ring
+                var outerRing = Path()
+                outerRing.addArc(center: CGPoint(x: cx, y: cy), radius: pulse + 18,
+                                 startAngle: .degrees(0), endAngle: .degrees(360), clockwise: false)
+                ctx.stroke(outerRing, with: .color(Color(red: 0.18, green: 0.68, blue: 0.92).opacity(0.06)),
+                           lineWidth: 1)
+
+                // Progress arc
+                var arc = Path()
+                arc.addArc(center: CGPoint(x: cx, y: cy), radius: pulse,
+                           startAngle: .degrees(-90), endAngle: .degrees(arcEnd), clockwise: false)
+                ctx.stroke(arc, with: .color(Color(red: 0.14, green: 0.82, blue: 0.72).opacity(0.22)),
+                           style: StrokeStyle(lineWidth: 2.5, lineCap: .round))
+
+                // Inner glow dot at arc tip
+                let tipAngle = arcEnd * .pi / 180
+                let tipX = cx + pulse * cos(tipAngle)
+                let tipY = cy + pulse * sin(tipAngle)
+                let dotR: CGFloat = 5
+                ctx.fill(Path(ellipseIn: CGRect(x: tipX - dotR, y: tipY - dotR,
+                                                width: dotR * 2, height: dotR * 2)),
+                         with: .color(Color(red: 0.14, green: 0.90, blue: 0.78).opacity(0.70)))
+
+                // ── 4. Horizontal growth-bar lines ────────────────────────
+                let barCount = 5
+                for b in 0..<barCount {
+                    let yLine = size.height * (0.45 + Double(b) * 0.095)
+                    let barWidth = size.width * (0.25 + 0.55 * abs(sin(t * 0.12 + Double(b) * 0.9)))
+                    var bar = Path()
+                    bar.move(to: CGPoint(x: 0, y: yLine))
+                    bar.addLine(to: CGPoint(x: barWidth, y: yLine))
+                    ctx.stroke(bar, with: .color(Color(red: 0.28, green: 0.58, blue: 0.95).opacity(0.07)),
+                               lineWidth: 1)
+                }
+            }
+            .ignoresSafeArea()
         }
     }
 }
