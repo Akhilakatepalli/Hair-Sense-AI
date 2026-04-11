@@ -19,9 +19,7 @@ struct HomeDashboardView: View {
                     case 1: DietView()
                     case 2: HairProgressView()
                     case 3: ScanView(selectedTab: $selectedTab)
-                    case 4: CommunityView()
-                    case 5: DiscoverView()
-                    case 6: ProfileView()
+                    case 4: ProfileView()
                     default: HomeView(selectedTab: $selectedTab)
                     }
                 }
@@ -56,8 +54,6 @@ struct ColorfulTabBar: View {
         TabItem(icon: "leaf.fill",      label: "Diet",    activeColor: Color(red: 0.25, green: 0.85, blue: 0.55)),
         TabItem(icon: "chart.bar.fill", label: "Progress",activeColor: Color(red: 0.45, green: 0.75, blue: 1.0)),
         TabItem(icon: "camera.fill",    label: "Scan",    activeColor: .white),
-        TabItem(icon: "person.2.fill",  label: "Social",  activeColor: Color(red: 1.0,  green: 0.70, blue: 0.20)),
-        TabItem(icon: "sparkles",       label: "Explore", activeColor: Color(red: 0.80, green: 0.55, blue: 1.0)),
         TabItem(icon: "person.fill",    label: "Profile", activeColor: Color(red: 0.95, green: 0.45, blue: 0.55)),
     ]
 
